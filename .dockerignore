@@ -132,3 +132,7 @@ dist
 .flaskenv*
 !.env.project
 !.env.vault
+
+# venv environment files
+.venv/
+venv
