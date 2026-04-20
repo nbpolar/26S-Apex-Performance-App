@@ -50,7 +50,7 @@ Each flagged performance also includes:
 |------------|-------------------|
 | Frontend   | React, Streamlit UI      |
 | Backend    | Flask (REST API, Python)  |
-| Database   | MySQL (RDMS) |
+| Database   | MySQL (RDBMS) |
 | Deployment | Docker, GitHub Actions |
 
 
