@@ -4,8 +4,10 @@ import os
 import logging
 
 from backend.db_connection import init_app as init_db
-from backend.simple.simple_routes import simple_routes
-from backend.ngos.ngo_routes import ngos
+from backend.coach.coach_routes import coach
+from backend.casual.casual_routes import casual
+from backend.competitive.competitive_routes import competitive
+from backend.admin.admin_routes import admin
 
 
 def create_app():
@@ -22,11 +24,11 @@ def create_app():
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
     # Database connection settings — values come from the .env file.
-    app.config["MYSQL_DATABASE_USER"] = os.getenv("DB_USER").strip()
+    app.config["MYSQL_DATABASE_USER"]     = os.getenv("DB_USER").strip()
     app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv("MYSQL_ROOT_PASSWORD").strip()
-    app.config["MYSQL_DATABASE_HOST"] = os.getenv("DB_HOST").strip()
-    app.config["MYSQL_DATABASE_PORT"] = int(os.getenv("DB_PORT").strip())
-    app.config["MYSQL_DATABASE_DB"] = os.getenv("DB_NAME").strip()
+    app.config["MYSQL_DATABASE_HOST"]     = os.getenv("DB_HOST").strip()
+    app.config["MYSQL_DATABASE_PORT"]     = int(os.getenv("DB_PORT").strip())
+    app.config["MYSQL_DATABASE_DB"]       = os.getenv("DB_NAME").strip()
 
     # Register the cleanup hook for the database connection.
     app.logger.info("create_app(): initializing database connection")
@@ -35,7 +37,9 @@ def create_app():
     # Register the routes from each Blueprint with the app object
     # and give a url prefix to each.
     app.logger.info("create_app(): registering blueprints")
-    app.register_blueprint(simple_routes)
-    app.register_blueprint(ngos, url_prefix="/ngo")
+    app.register_blueprint(coach,       url_prefix="/coach")
+    app.register_blueprint(casual,      url_prefix="/casual")
+    app.register_blueprint(competitive, url_prefix="/competitive")
+    app.register_blueprint(admin,       url_prefix="/admin")
 
     return app
