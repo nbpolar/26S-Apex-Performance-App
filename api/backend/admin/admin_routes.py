@@ -323,3 +323,133 @@ def delete_player(player_id):
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
+
+# 11. POST /admin/matches
+# Add a new match record to the system
+@admin.route("/matches", methods=["POST"])
+def add_match():
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        data = request.get_json()
+        required = ["match_date", "season_name", "map_name", "mode"]
+        for field in required:
+            if field not in data:
+                return jsonify({"error": f"Missing required field: {field}"}), 400
+ 
+        cursor.execute("""
+            INSERT INTO `Match`
+                (match_date, season_name, map_name, mode,
+                 match_duration, tournament_name, source_id)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """, (
+            data["match_date"],
+            data["season_name"],
+            data["map_name"],
+            data["mode"],
+            data.get("match_duration"),
+            data.get("tournament_name"),
+            data.get("source_id")
+        ))
+        get_db().commit()
+        return jsonify({"message": "Match added",
+                        "match_id": cursor.lastrowid}), 201
+    except Error as e:
+        current_app.logger.error(f"Error in add_match: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+
+# 12. POST /admin/matches/<match_id>/performance
+# Add a palyer performance record to a specific match
+@admin.route("/matches/<int:match_id>/performance", methods=["POST"])
+def add_match_performance(match_id):
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        data = request.get_json()
+        required = ["player_id", "kills", "deaths", "assists",
+                    "damage", "placement", "accuracy_pct"]
+        for field in required:
+            if field not in data:
+                return jsonify({"error": f"Missing required field: {field}"}), 400
+ 
+        cursor.execute("""
+            INSERT INTO PlayerMatchPerformance
+                (player_id, match_id, legend_id, weapon_id,
+                 kills, deaths, assists, damage,
+                 placement, knockdowns, accuracy_pct, win_flag,
+                 is_included_in_analysis, is_active)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s,
+                    %s, %s, %s, %s, TRUE, TRUE)
+        """, (
+            data["player_id"],
+            match_id,
+            data.get("legend_id"),
+            data.get("weapon_id"),
+            data["kills"],
+            data["deaths"],
+            data["assists"],
+            data["damage"],
+            data["placement"],
+            data.get("knockdowns", 0),
+            data["accuracy_pct"],
+            data.get("win_flag", False)
+        ))
+        get_db().commit()
+        return jsonify({"message": "Performance record added",
+                        "performance_id": cursor.lastrowid}), 201
+    except Error as e:
+        current_app.logger.error(f"Error in add_match_performance: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+
+
+# 13. POST /admin/legends
+# Add a new legend to the game
+@admin.route("/legends", methods=["POST"])
+def add_legend():
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        data = request.get_json()
+        required = ["legend_name", "class_type"]
+        for field in required:
+            if field not in data:
+                return jsonify({"error": f"Missing required field: {field}"}), 400
+ 
+        cursor.execute("""
+            INSERT INTO Legend (legend_name, class_type)
+            VALUES (%s, %s)
+        """, (data["legend_name"], data["class_type"]))
+        get_db().commit()
+        return jsonify({"message": "Legend added",
+                        "legend_id": cursor.lastrowid}), 201
+    except Error as e:
+        current_app.logger.error(f"Error in add_legend: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+
+# 14. POST /admin/weapons
+# Add a new weapon to the game
+@admin.route("/weapons", methods=["POST"])
+def add_weapon():
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        data = request.get_json()
+        required = ["weapon_name", "weapon_type", "ammo_type"]
+        for field in required:
+            if field not in data:
+                return jsonify({"error": f"Missing required field: {field}"}), 400
+ 
+        cursor.execute("""
+            INSERT INTO Weapon (weapon_name, weapon_type, ammo_type)
+            VALUES (%s, %s, %s)
+        """, (data["weapon_name"], data["weapon_type"], data["ammo_type"]))
+        get_db().commit()
+        return jsonify({"message": "Weapon added",
+                        "weapon_id": cursor.lastrowid}), 201
+    except Error as e:
+        current_app.logger.error(f"Error in add_weapon: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
