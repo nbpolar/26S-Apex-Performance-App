@@ -106,3 +106,5 @@ Each flagged performance also includes:
 ```bash
    docker compose down db -v && docker compose up -d
 ```
+
+LINK TO VIDEO: https://youtu.be/p3-T11bL3zE
