@@ -281,3 +281,68 @@ def delete_team_composition(composition_id):
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
+
+
+# 11. GET /coach/matches
+# Browse all matches to pick one for analysis
+@coach.route("/matches", methods=["GET"])
+def get_all_matches():
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        cursor.execute("""
+            SELECT
+                match_id,
+                match_date,
+                season_name,
+                map_name,
+                mode,
+                match_duration,
+                tournament_name
+            FROM `Match`
+            ORDER BY match_date DESC
+        """)
+        return jsonify(cursor.fetchall()), 200
+    except Error as e:
+        current_app.logger.error(f"Error in get_all_matches: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        
+# 12. GET /coach/matches/<match_id>/performance
+# View all player performancs in a specific match to compare dmg-to-kill
+# and dmg-to-knockdown ratios
+@coach.route("/matches/<int:match_id>/performance", methods=["GET"])
+def get_match_performance(match_id):
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        cursor.execute("""
+            SELECT
+                pmp.performance_id,
+                pmp.player_id,
+                p.username,
+                p.team_id,
+                t.team_name,
+                l.legend_name,
+                w.weapon_name,
+                pmp.kills,
+                pmp.deaths,
+                pmp.assists,
+                pmp.damage,
+                pmp.knockdowns,
+                pmp.accuracy_pct,
+                pmp.placement,
+                pmp.is_included_in_analysis
+            FROM PlayerMatchPerformance pmp
+            JOIN Player p ON pmp.player_id = p.player_id
+            LEFT JOIN Team   t ON p.team_id     = t.team_id
+            LEFT JOIN Legend l ON pmp.legend_id = l.legend_id
+            LEFT JOIN Weapon w ON pmp.weapon_id = w.weapon_id
+            WHERE pmp.match_id = %s
+            ORDER BY pmp.damage DESC
+        """, (match_id,))
+        return jsonify(cursor.fetchall()), 200
+    except Error as e:
+        current_app.logger.error(f"Error in get_match_performance: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
