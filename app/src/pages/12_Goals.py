@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("🎯 My Goals")
+st.title("My Goals")
 st.write("Set and track your personal gameplay goals.")
 
 API_BASE = "http://web-api:4000"
@@ -29,7 +29,7 @@ except Exception as e:
     st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("➕ Add New Goal")
+st.subheader("Add New Goal")
 with st.form("add_goal"):
     col1, col2 = st.columns(2)
     with col1:
@@ -60,7 +60,7 @@ with st.form("add_goal"):
             st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("🗑️ Delete a Goal")
+st.subheader("Delete a Goal")
 with st.form("delete_goal"):
     goal_id = st.number_input("Goal ID to delete", min_value=1, step=1)
     if st.form_submit_button("Delete Goal", type='primary'):
