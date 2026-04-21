@@ -6,7 +6,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title(f"Welcome, Coach {st.session_state['first_name']}! 🎯")
+st.title(f"Welcome, Coach {st.session_state['first_name']}!")
 st.write("### What would you like to analyze today?")
 st.write("Use the sidebar or buttons below to navigate.")
 
