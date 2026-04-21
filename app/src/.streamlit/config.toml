@@ -1,0 +1,13 @@
+[client]
+showSidebarNavigation = false
+
+[theme]
+base="dark"
+primaryColor="#E8373E"
+backgroundColor="#0F1923"
+secondaryBackgroundColor="#1A2434"
+textColor="#E8EDF2"
+font="sans serif"
+
+[server]
+runOnSave = true
