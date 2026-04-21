@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("📋 Match History")
+st.title("Match History")
 st.write("View and manage your match history. Include or exclude matches from your analysis.")
 
 API_BASE = "http://web-api:4000"
@@ -32,7 +32,7 @@ st.divider()
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("❌ Exclude Match from Analysis")
+    st.subheader("Exclude Match from Analysis")
     with st.form("exclude_form"):
         perf_id = st.number_input("Performance ID to exclude", min_value=1, step=1)
         if st.form_submit_button("Exclude Match", type='primary'):
@@ -49,7 +49,7 @@ with col1:
                 st.error(f"Could not connect to API: {e}")
 
 with col2:
-    st.subheader("✅ Re-include Match in Analysis")
+    st.subheader("Re-include Match in Analysis")
     with st.form("include_form"):
         perf_id = st.number_input("Performance ID to include", min_value=1, step=1)
         if st.form_submit_button("Include Match", type='primary'):

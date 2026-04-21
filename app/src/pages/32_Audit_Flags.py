@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("🚩 Audit Flags")
+st.title("Audit Flags")
 st.write("Review flagged accounts with impossible stats for potential cheating.")
 
 API_BASE = "http://web-api:4000"
@@ -32,7 +32,7 @@ except Exception as e:
     st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("✏️ Update Flag Status")
+st.subheader("Update Flag Status")
 with st.form("update_flag"):
     col1, col2 = st.columns(2)
     with col1:
