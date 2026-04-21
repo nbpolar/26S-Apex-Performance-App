@@ -13,7 +13,7 @@ st.write("Archive old season data to keep current season queries fast.")
 
 API_BASE = "http://web-api:4000"
 
-st.subheader("📊 System Reports")
+st.subheader("System Reports")
 try:
     r = requests.get(f"{API_BASE}/admin/reports")
     if r.status_code == 200:
@@ -28,7 +28,7 @@ except Exception as e:
     st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("📦 Archive a Season")
+st.subheader("Archive a Season")
 with st.form("archive_season"):
     season = st.selectbox("Season to Archive",
                           ["Season 18", "Season 19", "Season 20", "Season 21"])
@@ -46,7 +46,7 @@ with st.form("archive_season"):
             st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("🔌 Data Sources")
+st.subheader("Data Sources")
 try:
     r = requests.get(f"{API_BASE}/admin/data-sources")
     if r.status_code == 200:
@@ -60,7 +60,7 @@ try:
 except Exception as e:
     st.error(f"Could not connect to API: {e}")
 
-st.subheader("➕ Add Data Source")
+st.subheader("Add Data Source")
 with st.form("add_source"):
     col1, col2 = st.columns(2)
     with col1:
