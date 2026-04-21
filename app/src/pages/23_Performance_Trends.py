@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("📈 Performance Trends")
+st.title("Performance Trends")
 st.write("Track your performance over time to see whether you're improving.")
 
 API_BASE = "http://web-api:4000"
@@ -57,7 +57,7 @@ except Exception as e:
     st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("🔫 Weapon Performance")
+st.subheader("Weapon Performance")
 try:
     r = requests.get(f"{API_BASE}/competitive/players/{player_id}/weapon-stats")
     if r.status_code == 200:
