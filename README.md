@@ -88,7 +88,8 @@ Each flagged performance also includes:
 
 4. **Start all containers**
 ```bash
-   docker compose up -d
+   docker compose up 
+
 ```
 
 5. **Open the app in your browser**
