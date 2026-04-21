@@ -1737,8 +1737,8 @@ CREATE TABLE IF NOT EXISTS ArchivedPerformance (
    damage FLOAT,
    accuracy_pct DECIMAL(5,2),
    placement INT,
-   FOREIGN KEY (archived_match_id) REFERENCES ArchivedMatch(archived_match_id)
-   FOREIGN KEY (original_performance_id) REFERENCES PlayerMatchPerformance(performance_id)
+   FOREIGN KEY (archived_match_id) REFERENCES ArchivedMatch(archived_match_id),
+   FOREIGN KEY (original_performance_id) REFERENCES PlayerMatchPerformance(performance_id),
    FOREIGN KEY (player_id) REFERENCES Player(player_id)
 );
 
