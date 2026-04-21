@@ -281,3 +281,99 @@ def delete_goal(player_id, goal_id):
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
+
+
+# 11. PUT /casual/players/<player_id>/goals/<goal_id>
+# Updates progress on an existing goal
+@casual.route("/players/<int:player_id>/goals/<int:goal_id>", methods=["PUT"])
+def update_goal(player_id, goal_id):
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        data = request.get_json()
+        allowed = ["current_value", "goal_status", "end_date"]
+        updates = [f"{f} = %s" for f in allowed if f in data]
+        params  = [data[f] for f in allowed if f in data]
+ 
+        if not updates:
+            return jsonify({"error": "No valid fields to update"}), 400
+ 
+        params += [player_id, goal_id]
+        cursor.execute(
+            f"UPDATE Goal SET {', '.join(updates)} WHERE player_id = %s AND goal_id = %s",
+            params
+        )
+        get_db().commit()
+        if cursor.rowcount == 0:
+            return jsonify({"error": "Goal not found"}), 404
+        return jsonify({"message": "Goal updated"}), 200
+    except Error as e:
+        current_app.logger.error(f"Error in update_goal: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+ 
+ 
+# 12. PUT /casual/players/<player_id>/notifications/<notification_id>
+# User Story 2.3 - Mark a notification as read after viewing event details
+@casual.route("/players/<int:player_id>/notifications/<int:notification_id>", methods=["PUT"])
+def mark_notification_read(player_id, notification_id):
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        data = request.get_json()
+        if "read_status" not in data:
+            return jsonify({"error": "Missing required field: read_status"}), 400
+ 
+        cursor.execute("""
+            UPDATE Notification
+            SET read_status = %s
+            WHERE notification_id = %s AND player_id = %s
+        """, (data["read_status"], notification_id, player_id))
+        get_db().commit()
+        if cursor.rowcount == 0:
+            return jsonify({"error": "Notification not found"}), 404
+        return jsonify({"message": "Notification updated"}), 200
+    except Error as e:
+        current_app.logger.error(f"Error in mark_notification_read: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        
+# 13. DELETE /casual/players/<player_id>/goals/<goal_id>
+# Deletes a goal the player no longer wants
+@casual.route("/players/<int:player_id>/goals/<int:goal_id>", methods=["DELETE"])
+def delete_goal(player_id, goal_id):
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "DELETE FROM Goal WHERE player_id = %s AND goal_id = %s",
+            (player_id, goal_id)
+        )
+        get_db().commit()
+        if cursor.rowcount == 0:
+            return jsonify({"error": "Goal not found"}), 404
+        return jsonify({"message": "Goal deleted"}), 200
+    except Error as e:
+        current_app.logger.error(f"Error in delete_goal: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        
+# 14. DELETE /casual/players/<player_id>/stats/<stat_entry_id>
+# Permanently remove an old stat entry that the player no longer cares about.
+@casual.route("/players/<int:player_id>/stats/<int:stat_entry_id>", methods=["DELETE"])
+def delete_stat_entry(player_id, stat_entry_id):
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        cursor.execute(
+            "DELETE FROM TrackedStatEntry WHERE stat_entry_id = %s AND player_id = %s",
+            (stat_entry_id, player_id)
+        )
+        get_db().commit()
+        if cursor.rowcount == 0:
+            return jsonify({"error": "Stat entry not found"}), 404
+        return jsonify({"message": "Stat entry deleted"}), 200
+    except Error as e:
+        current_app.logger.error(f"Error in delete_stat_entry: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
