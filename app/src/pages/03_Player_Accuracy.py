@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("🎯 Player Accuracy by Weapon")
+st.title("Player Accuracy by Weapon")
 st.write("Analyze player accuracy across different weapon types to recommend optimal loadouts.")
 
 API_BASE = "http://web-api:4000"
@@ -36,7 +36,7 @@ except Exception as e:
     st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("📊 Team Knockdown Efficiency")
+st.subheader("Team Knockdown Efficiency")
 team_id = st.session_state.get('team_id', 1)
 selected_team = st.number_input("Team ID", min_value=1, value=team_id, step=1)
 
