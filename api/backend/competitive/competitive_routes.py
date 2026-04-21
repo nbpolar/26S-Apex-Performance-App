@@ -5,11 +5,6 @@ from mysql.connector import Error
 competitive = Blueprint("competitive", __name__)
 
 
-# ------------------------------------------------------------
-# 1. GET /competitive/players/<player_id>/performance
-# User Story 3.1 - View game performance stats (kills,
-# accuracy, win rate) to know strengths and weaknesses.
-# ------------------------------------------------------------
 @competitive.route("/players/<int:player_id>/performance", methods=["GET"])
 def get_player_performance(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -39,12 +34,6 @@ def get_player_performance(player_id):
     finally:
         cursor.close()
 
-
-# ------------------------------------------------------------
-# 2. GET /competitive/players/<player_id>/performance-history
-# User Story 3.2 - Track performance over time to see
-# whether the player is improving.
-# ------------------------------------------------------------
 @competitive.route("/players/<int:player_id>/performance-history", methods=["GET"])
 def get_performance_history(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -70,11 +59,6 @@ def get_performance_history(player_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 3. GET /competitive/leaderboard
-# User Story 3.3 - Compare rank with other players to see
-# where the player stands competitively.
-# ------------------------------------------------------------
 @competitive.route("/leaderboard", methods=["GET"])
 def get_leaderboard():
     cursor = get_db().cursor(dictionary=True)
@@ -100,11 +84,6 @@ def get_leaderboard():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 4. GET /competitive/meta/trends
-# User Story 3.4 - See weapon and legend meta trends to stay
-# competitive and not fall behind.
-# ------------------------------------------------------------
 @competitive.route("/meta/trends", methods=["GET"])
 def get_meta_trends():
     cursor = get_db().cursor(dictionary=True)
@@ -139,11 +118,6 @@ def get_meta_trends():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 5. GET /competitive/players/<player_id>/match-history
-# User Story 3.6 - View match history with include/exclude
-# status so player can filter their analysis.
-# ------------------------------------------------------------
 @competitive.route("/players/<int:player_id>/match-history", methods=["GET"])
 def get_match_history(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -171,12 +145,6 @@ def get_match_history(player_id):
     finally:
         cursor.close()
 
-
-# ------------------------------------------------------------
-# 6. GET /competitive/players/<player_id>/weapon-stats
-# User Story 3.1 - View weapon performance stats to know
-# which weapons the player excels with.
-# ------------------------------------------------------------
 @competitive.route("/players/<int:player_id>/weapon-stats", methods=["GET"])
 def get_player_weapon_stats(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -203,10 +171,6 @@ def get_player_weapon_stats(player_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 7. PUT /competitive/players/<player_id>/matches/<performance_id>/exclude
-# User Story 3.6 - Mark a match as excluded from analysis.
-# ------------------------------------------------------------
 @competitive.route(
     "/players/<int:player_id>/matches/<int:performance_id>/exclude",
     methods=["PUT"]
@@ -230,10 +194,6 @@ def exclude_match(player_id, performance_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 8. PUT /competitive/players/<player_id>/matches/<performance_id>/include
-# User Story 3.6 - Re-include a previously excluded match.
-# ------------------------------------------------------------
 @competitive.route(
     "/players/<int:player_id>/matches/<int:performance_id>/include",
     methods=["PUT"]
@@ -257,50 +217,6 @@ def include_match(player_id, performance_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 9. POST /competitive/players/<player_id>/performance
-# User Story 3.1 - Add a new match performance record.
-# ------------------------------------------------------------
-@competitive.route("/players/<int:player_id>/performance", methods=["POST"])
-def add_match_performance(player_id):
-    cursor = get_db().cursor(dictionary=True)
-    try:
-        data = request.get_json()
-        required = ["match_id", "kills", "deaths", "assists",
-                    "damage", "placement", "accuracy_pct"]
-        for field in required:
-            if field not in data:
-                return jsonify({"error": f"Missing required field: {field}"}), 400
-
-        cursor.execute("""
-            INSERT INTO PlayerMatchPerformance
-                (player_id, match_id, kills, deaths, assists, damage,
-                 placement, accuracy_pct, win_flag,
-                 is_included_in_analysis, is_active)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s,
-                    %s, TRUE, TRUE)
-        """, (
-            player_id,
-            data["match_id"],
-            data["kills"],
-            data["deaths"],
-            data["assists"],
-            data["damage"],
-            data["placement"],
-            data["accuracy_pct"],
-            data.get("win_flag", False)
-        ))
-        get_db().commit()
-        return jsonify({"message": "Performance record added",
-                        "performance_id": cursor.lastrowid}), 201
-    except Error as e:
-        current_app.logger.error(f"Error in add_match_performance: {e}")
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-
-# 10. GET /competitive/players/<player_id>
-# View a specific player's full profile (rank, team, performance, etc)
 @competitive.route("/players/<int:player_id>", methods=["GET"])
 def get_player_profile(player_id):
     cursor = get_db().cursor(dictionary=True)
