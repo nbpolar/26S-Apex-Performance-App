@@ -89,7 +89,8 @@ Each flagged performance also includes:
 4. **Start all containers**
 ```bash
    docker compose up 
-
+   - note: if the mysql_db container isn't available when checking the status through the docker ps command,
+   go into docker desktop and manually enable the db container
 ```
 
 5. **Open the app in your browser**
