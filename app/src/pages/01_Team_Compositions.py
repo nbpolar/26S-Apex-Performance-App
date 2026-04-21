@@ -7,7 +7,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("🧩 Team Compositions")
+st.title("Team Compositions")
 st.write("View the most used team compositions in competitive play.")
 
 API_BASE = "http://web-api:4000"
@@ -30,7 +30,7 @@ except Exception as e:
 st.divider()
 
 # ---- Add a new composition ----
-st.subheader("➕ Add New Team Composition")
+st.subheader("Add New Team Composition")
 with st.form("add_comp_form"):
     col1, col2 = st.columns(2)
     with col1:
@@ -57,7 +57,7 @@ with st.form("add_comp_form"):
 st.divider()
 
 # ---- Delete a composition ----
-st.subheader("🗑️ Delete Team Composition")
+st.subheader("Delete Team Composition")
 with st.form("delete_comp_form"):
     comp_id = st.number_input("Composition ID to delete", min_value=1, step=1)
     if st.form_submit_button("Delete", type='primary'):
