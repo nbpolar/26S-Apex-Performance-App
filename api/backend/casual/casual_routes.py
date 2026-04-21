@@ -5,11 +5,6 @@ from mysql.connector import Error
 casual = Blueprint("casual", __name__)
 
 
-# ------------------------------------------------------------
-# 1. GET /casual/meta/top-weapons
-# User Story 2.1 - See current top performing weapons so the
-# casual player can make informed decisions without research.
-# ------------------------------------------------------------
 @casual.route("/meta/top-weapons", methods=["GET"])
 def get_top_weapons():
     cursor = get_db().cursor(dictionary=True)
@@ -33,11 +28,6 @@ def get_top_weapons():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 2. GET /casual/meta/top-legends
-# User Story 2.1 - See current top performing legends
-# alongside weapons for informed decision-making.
-# ------------------------------------------------------------
 @casual.route("/meta/top-legends", methods=["GET"])
 def get_top_legends():
     cursor = get_db().cursor(dictionary=True)
@@ -62,11 +52,6 @@ def get_top_legends():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 3. GET /casual/players/<player_id>/stats
-# User Story 2.2 - Keep track of best personal stats to
-# compare with friends.
-# ------------------------------------------------------------
 @casual.route("/players/<int:player_id>/stats", methods=["GET"])
 def get_player_stats(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -88,11 +73,6 @@ def get_player_stats(player_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 4. GET /casual/players/<player_id>/notifications
-# User Story 2.3 - Get notified about limited time game modes
-# and events so the player doesn't miss out.
-# ------------------------------------------------------------
 @casual.route("/players/<int:player_id>/notifications", methods=["GET"])
 def get_player_notifications(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -119,10 +99,6 @@ def get_player_notifications(player_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 5. GET /casual/players/<player_id>/goals
-# User Story 2.4 - View and track relaxed goals.
-# ------------------------------------------------------------
 @casual.route("/players/<int:player_id>/goals", methods=["GET"])
 def get_player_goals(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -141,11 +117,6 @@ def get_player_goals(player_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 6. GET /casual/players/<player_id>/best-legends-weapons
-# User Story 2.5 - See which characters and weapons the player
-# personally performs best with based on match history.
-# ------------------------------------------------------------
 @casual.route("/players/<int:player_id>/best-legends-weapons", methods=["GET"])
 def get_best_legends_weapons(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -172,10 +143,7 @@ def get_best_legends_weapons(player_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 7. POST /casual/players/<player_id>/goals
-# User Story 2.4 - Set a new relaxed goal to track.
-# ------------------------------------------------------------
+
 @casual.route("/players/<int:player_id>/goals", methods=["POST"])
 def add_goal(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -203,11 +171,6 @@ def add_goal(player_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 8. PUT /casual/players/stats/<stat_entry_id>/hide
-# User Story 2.6 - Remove/hide old stat entries that the
-# player no longer cares about.
-# ------------------------------------------------------------
 @casual.route("/players/stats/<int:stat_entry_id>/hide", methods=["PUT"])
 def hide_stat_entry(stat_entry_id):
     cursor = get_db().cursor(dictionary=True)
@@ -228,10 +191,6 @@ def hide_stat_entry(stat_entry_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 9. PUT /casual/players/<player_id>/goals/<goal_id>
-# Update progress on an existing goal.
-# ------------------------------------------------------------
 @casual.route("/players/<int:player_id>/goals/<int:goal_id>", methods=["PUT"])
 def update_goal(player_id, goal_id):
     cursor = get_db().cursor(dictionary=True)
@@ -260,10 +219,6 @@ def update_goal(player_id, goal_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 10. DELETE /casual/players/<player_id>/goals/<goal_id>
-# User Story 2.6 - Delete a goal the player no longer wants.
-# ------------------------------------------------------------
 @casual.route("/players/<int:player_id>/goals/<int:goal_id>", methods=["DELETE"])
 def delete_goal(player_id, goal_id):
     cursor = get_db().cursor(dictionary=True)
@@ -282,8 +237,7 @@ def delete_goal(player_id, goal_id):
     finally:
         cursor.close()
 
-# 11. GET /casual/players/<player_id>/legend-performance
-# View legend performance breakdown
+
 @casual.route("/players/<int:player_id>/legend-performance", methods=["GET"])
 def get_player_legend_performance(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -310,8 +264,7 @@ def get_player_legend_performance(player_id):
     finally:
         cursor.close()
         
-# 12. GET /casual/events
-# Browse all game events
+
 @casual.route("/events", methods=["GET"])
 def get_events():
     cursor = get_db().cursor(dictionary=True)
@@ -334,8 +287,7 @@ def get_events():
     finally:
         cursor.close()
         
-# 13. PUT /casual/players/<player_id>/notifications/<notification_id>
-# Mark a notification as read after viewing the event details.
+
 @casual.route("/players/<int:player_id>/notifications/<int:notification_id>", methods=["PUT"])
 def mark_notification_read(player_id, notification_id):
     cursor = get_db().cursor(dictionary=True)
@@ -359,8 +311,7 @@ def mark_notification_read(player_id, notification_id):
     finally:
         cursor.close()
         
-# 14. DELETE /casual/players/<player_id>/stats/<stat_entry_id>
-# Permanently remove an old stat entry
+
 @casual.route("/players/<int:player_id>/stats/<int:stat_entry_id>", methods=["DELETE"])
 def delete_stat_entry(player_id, stat_entry_id):
     cursor = get_db().cursor(dictionary=True)
