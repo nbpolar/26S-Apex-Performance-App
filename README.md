@@ -103,5 +103,5 @@ Each flagged performance also includes:
 
 7. **If you make changes to the database files, recreate the DB container**
 ```bash
-   docker compose down db -v && docker compose up db
+   docker compose down db -v && docker compose up 
 ```
