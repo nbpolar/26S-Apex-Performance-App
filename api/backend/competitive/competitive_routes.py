@@ -298,3 +298,40 @@ def add_match_performance(player_id):
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
+
+# 10. GET /competitive/players/<player_id>
+# View a specific player's full profile (rank, team, performance, etc)
+@competitive.route("/players/<int:player_id>", methods=["GET"])
+def get_player_profile(player_id):
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        cursor.execute("""
+            SELECT
+                p.player_id,
+                p.username,
+                p.region,
+                p.join_date,
+                p.current_rank,
+                p.current_rank_points,
+                p.current_rank_position,
+                p.total_matches,
+                p.current_win_rate,
+                p.overall_accuracy,
+                t.team_name,
+                rt.tier_name,
+                rt.division_name
+            FROM Player p
+            LEFT JOIN Team     t  ON p.team_id      = t.team_id
+            LEFT JOIN RankTier rt ON p.rank_tier_id = rt.rank_tier_id
+            WHERE p.player_id = %s
+        """, (player_id,))
+        result = cursor.fetchone()
+        if not result:
+            return jsonify({"error": "Player not found"}), 404
+        return jsonify(result), 200
+    except Error as e:
+        current_app.logger.error(f"Error in get_player_profile: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+ 
