@@ -41,6 +41,7 @@ The audit system flags suspicious performance, such as:
  - Kill spikes inconsistent with regular match context
  - Abnormally high accuracy
  - Any other outliers compared to a baseline performance
+
 Each flagged performance also includes:
  - Flag type
  - Reason for flag
@@ -50,7 +51,7 @@ Each flagged performance also includes:
 **Tech Stack** - 
 | Category   | Technology        |
 |------------|-------------------|
-| Frontend   | React, Streamlit UI      |
+| Frontend   | Streamlit UI      |
 | Backend    | Flask (REST API, Python)  |
 | Database   | MySQL (RDBMS) |
 | Deployment | Docker, GitHub Actions |
