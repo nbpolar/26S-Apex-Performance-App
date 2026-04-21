@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("🗺️ Death Heatmap")
+st.title("Death Heatmap")
 st.write("View where players are dying most frequently on each map.")
 
 API_BASE = "http://web-api:4000"
