@@ -1,4 +1,4 @@
-# Spring 2026 CS 3200 Project - Apex Performance App
+# Spring 2026 CS 3200 Project - Apex Performance App - Tylor Chen, Ademide Odusanya, Tannop Tangpiroonthum, Deniz Kalkandelen 
 
 ## Overview
 
