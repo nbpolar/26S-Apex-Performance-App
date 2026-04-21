@@ -5,11 +5,6 @@ from mysql.connector import Error
 coach = Blueprint("coach", __name__)
 
 
-# ------------------------------------------------------------
-# 1. GET /coach/team-compositions
-# User Story 1.1 - View usage rates for popular competitive
-# team compositions to determine the most effective comp.
-# ------------------------------------------------------------
 @coach.route("/team-compositions", methods=["GET"])
 def get_team_compositions():
     cursor = get_db().cursor(dictionary=True)
@@ -35,11 +30,6 @@ def get_team_compositions():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 2. GET /coach/teams/<team_id>/death-heatmap
-# User Story 1.2 - View heatmap of player death locations
-# to advise team on which areas to avoid.
-# ------------------------------------------------------------
 @coach.route("/teams/<int:team_id>/death-heatmap", methods=["GET"])
 def get_death_heatmap(team_id):
     cursor = get_db().cursor(dictionary=True)
@@ -66,11 +56,6 @@ def get_death_heatmap(team_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 3. GET /coach/teams/<team_id>/placement-vs-kills
-# User Story 1.3 - View placement vs kills/damage to identify
-# if the meta favors aggressive or passive playstyle.
-# ------------------------------------------------------------
 @coach.route("/teams/<int:team_id>/placement-vs-kills", methods=["GET"])
 def get_placement_vs_kills(team_id):
     cursor = get_db().cursor(dictionary=True)
@@ -95,11 +80,6 @@ def get_placement_vs_kills(team_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 4. GET /coach/teams/<team_id>/damage-to-kills
-# User Story 1.4 - View player damage to kill ratios to
-# identify if players are struggling to finish gunfights.
-# ------------------------------------------------------------
 @coach.route("/teams/<int:team_id>/damage-to-kills", methods=["GET"])
 def get_damage_to_kills(team_id):
     cursor = get_db().cursor(dictionary=True)
@@ -124,11 +104,6 @@ def get_damage_to_kills(team_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 5. GET /coach/players/<player_id>/accuracy-by-weapon
-# User Story 1.5 - View player accuracy by weapon type to
-# recommend fitting weapon loadouts.
-# ------------------------------------------------------------
 @coach.route("/players/<int:player_id>/accuracy-by-weapon", methods=["GET"])
 def get_accuracy_by_weapon(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -154,11 +129,6 @@ def get_accuracy_by_weapon(player_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 6. GET /coach/teams/<team_id>/knockdown-efficiency
-# User Story 1.6 - Compare damage to knockdowns to identify
-# players securing meaningful frags vs poke damage.
-# ------------------------------------------------------------
 @coach.route("/teams/<int:team_id>/knockdown-efficiency", methods=["GET"])
 def get_knockdown_efficiency(team_id):
     cursor = get_db().cursor(dictionary=True)
@@ -184,10 +154,6 @@ def get_knockdown_efficiency(team_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 7. GET /coach/teams
-# Get all teams (for coach to browse/select a team)
-# ------------------------------------------------------------
 @coach.route("/teams", methods=["GET"])
 def get_all_teams():
     cursor = get_db().cursor(dictionary=True)
@@ -201,10 +167,6 @@ def get_all_teams():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 8. POST /coach/team-compositions
-# Add a new team composition record for a match.
-# ------------------------------------------------------------
 @coach.route("/team-compositions", methods=["POST"])
 def add_team_composition():
     cursor = get_db().cursor(dictionary=True)
@@ -230,10 +192,7 @@ def add_team_composition():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 9. PUT /coach/team-compositions/<composition_id>
-# Update legends in an existing team composition.
-# ------------------------------------------------------------
+
 @coach.route("/team-compositions/<int:composition_id>", methods=["PUT"])
 def update_team_composition(composition_id):
     cursor = get_db().cursor(dictionary=True)
@@ -260,10 +219,6 @@ def update_team_composition(composition_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 10. DELETE /coach/team-compositions/<composition_id>
-# Remove a team composition record.
-# ------------------------------------------------------------
 @coach.route("/team-compositions/<int:composition_id>", methods=["DELETE"])
 def delete_team_composition(composition_id):
     cursor = get_db().cursor(dictionary=True)
@@ -278,71 +233,6 @@ def delete_team_composition(composition_id):
         return jsonify({"message": "Team composition deleted"}), 200
     except Error as e:
         current_app.logger.error(f"Error in delete_team_composition: {e}")
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-
-
-# 11. GET /coach/matches
-# Browse all matches to pick one for analysis
-@coach.route("/matches", methods=["GET"])
-def get_all_matches():
-    cursor = get_db().cursor(dictionary=True)
-    try:
-        cursor.execute("""
-            SELECT
-                match_id,
-                match_date,
-                season_name,
-                map_name,
-                mode,
-                match_duration,
-                tournament_name
-            FROM `Match`
-            ORDER BY match_date DESC
-        """)
-        return jsonify(cursor.fetchall()), 200
-    except Error as e:
-        current_app.logger.error(f"Error in get_all_matches: {e}")
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        
-# 12. GET /coach/matches/<match_id>/performance
-# View all player performancs in a specific match to compare dmg-to-kill
-# and dmg-to-knockdown ratios
-@coach.route("/matches/<int:match_id>/performance", methods=["GET"])
-def get_match_performance(match_id):
-    cursor = get_db().cursor(dictionary=True)
-    try:
-        cursor.execute("""
-            SELECT
-                pmp.performance_id,
-                pmp.player_id,
-                p.username,
-                p.team_id,
-                t.team_name,
-                l.legend_name,
-                w.weapon_name,
-                pmp.kills,
-                pmp.deaths,
-                pmp.assists,
-                pmp.damage,
-                pmp.knockdowns,
-                pmp.accuracy_pct,
-                pmp.placement,
-                pmp.is_included_in_analysis
-            FROM PlayerMatchPerformance pmp
-            JOIN Player p ON pmp.player_id = p.player_id
-            LEFT JOIN Team   t ON p.team_id     = t.team_id
-            LEFT JOIN Legend l ON pmp.legend_id = l.legend_id
-            LEFT JOIN Weapon w ON pmp.weapon_id = w.weapon_id
-            WHERE pmp.match_id = %s
-            ORDER BY pmp.damage DESC
-        """, (match_id,))
-        return jsonify(cursor.fetchall()), 200
-    except Error as e:
-        current_app.logger.error(f"Error in get_match_performance: {e}")
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
