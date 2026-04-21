@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("👤 Player Management")
+st.title("Player Management")
 st.write("Add, update, and remove players from the system.")
 
 API_BASE = "http://web-api:4000"
@@ -28,7 +28,7 @@ except Exception as e:
     st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("➕ Add New Player")
+st.subheader("Add New Player")
 with st.form("add_player"):
     col1, col2 = st.columns(2)
     with col1:
@@ -59,7 +59,7 @@ st.divider()
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("✏️ Update Player")
+    st.subheader("Update Player")
     with st.form("update_player"):
         pid          = st.number_input("Player ID", min_value=1, step=1)
         new_rank     = st.selectbox("New Rank", ["Bronze","Silver","Gold","Platinum","Diamond","Master","Predator"])
@@ -77,7 +77,7 @@ with col1:
                 st.error(f"Could not connect to API: {e}")
 
 with col2:
-    st.subheader("🗑️ Delete Player")
+    st.subheader("Delete Player")
     with st.form("delete_player"):
         pid = st.number_input("Player ID to delete", min_value=1, step=1)
         if st.form_submit_button("Delete Player", type='primary'):
