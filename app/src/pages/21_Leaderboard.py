@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("🥇 Leaderboard")
+st.title("Leaderboard")
 st.write("See where you stand against other players.")
 
 API_BASE = "http://web-api:4000"
@@ -32,7 +32,7 @@ except Exception as e:
     st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("📊 Meta Trends")
+st.subheader("Meta Trends")
 season = st.selectbox("Season", ["Season 18", "Season 19", "Season 20", "Season 21"])
 try:
     r = requests.get(f"{API_BASE}/competitive/meta/trends?season={season}")
