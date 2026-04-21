@@ -16,6 +16,8 @@ This tool is intended for:
  - Aspiring players
  - Esports Researchers
 
+The app also features an audit system that notices unusual trends in player data, such as abnormally high accuracy, kill spikes, etc, which could interfere with data reliability and quality. This ensures that data will effectively reflect the state of the game with integrity. 
+
 ## Key Features of this tool:
 
 **Player Match Tracking** - 
