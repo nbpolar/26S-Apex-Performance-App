@@ -25,6 +25,7 @@ try:
             st.dataframe(df, use_container_width=True)
 
             st.subheader("Average Accuracy by Weapon Type")
+            df['avg_accuracy'] = pd.to_numeric(df['avg_accuracy'], errors='coerce')
             by_type = df.groupby('weapon_type')['avg_accuracy'].mean().reset_index()
             st.bar_chart(by_type.set_index('weapon_type')['avg_accuracy'])
         else:
