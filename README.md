@@ -8,7 +8,7 @@ We are building an app that will track pro players and the matches that they pla
  - Weapons
  - Viability rankings
 
-While many tracker apps already aim to track player performance in ranked and unranked games, there aren't any trackers that effectively track professional matches and the performance of players playing in them. Since professional matches are naturally more competitive, the data from those matches should be more effective at indicaating patterns in an ever changing meta, while also being able to indicate emerging trends. 
+While many tracker apps already aim to track player performance in ranked and unranked games, there aren't any trackers that effectively track professional matches and the performance of players playing in them. Since professional matches are naturally more competitive, the data from those matches should be more effective at indicating patterns in an ever changing meta, while also being able to indicate emerging trends. 
 
 This tool is intended for:
  - Competitive Analysts
@@ -41,6 +41,7 @@ The audit system flags suspicious performance, such as:
  - Kill spikes inconsistent with regular match context
  - Abnormally high accuracy
  - Any other outliers compared to a baseline performance
+
 Each flagged performance also includes:
  - Flag type
  - Reason for flag
@@ -50,7 +51,7 @@ Each flagged performance also includes:
 **Tech Stack** - 
 | Category   | Technology        |
 |------------|-------------------|
-| Frontend   | React, Streamlit UI      |
+| Frontend   | Streamlit UI      |
 | Backend    | Flask (REST API, Python)  |
 | Database   | MySQL (RDBMS) |
 | Deployment | Docker, GitHub Actions |
@@ -62,29 +63,44 @@ Each flagged performance also includes:
  - Docker installed and running (refer to https://www.docker.com/get-started if not)
 
 **Instructions**: 
-1. Build the Docker image
-   ```bash
-   docker build -t apex-performance-app . 
-   ```
-2. Run the Docker container
-   ```bash
-   docker run -d --name apa-container -p 3306:3306 \ 
-   -e MYSQL_ROOT_PASSWORD=rootpassword \ 
-   apex-performance-app
-   ```
-3. Verify the container is running
-   ```bash
-   docker ps
-   ```
-4. Access the container
-   ```bash
-   docker exec -it apa-container mysql -u root -p
-   ```
-5. Stop the container
-   ```bash
-   docker stop apa-container
-   ``` 
-6. Clean up the container
-   ```bash
-   docker rm apa-container
-   ```
+## How to Run the App
+
+### Prerequisites
+- Docker Desktop installed and running (https://www.docker.com/get-started)
+- GitHub Desktop or Git installed
+
+### Setup Instructions
+
+1. **Clone the repository**
+   - Open GitHub Desktop → File → Clone Repository
+   - URL: `https://github.com/nbpolar/26S-Apex-Performance-App`
+
+2. **Create the `.env` file**
+   - Navigate to the `api/` folder in the cloned repo
+   - Copy `.env.template` and rename the copy to `.env`
+   - Open `.env` and update the following:
+     - Change `DB_NAME=ngo_db` to `DB_NAME=apa_db`
+     - Replace `<change-this-to-a-strong-password>` with any password (e.g. `password123`)
+     - Replace `<change-this-to-a-random-secret>` with any string (e.g. `mysecretkey123`)
+
+3. **Open a terminal in the project folder**
+   - In GitHub Desktop: Repository → Open in Command Prompt
+
+4. **Start all containers**
+```bash
+   docker compose up -d
+```
+
+5. **Open the app in your browser**
+   - Streamlit UI: http://localhost:8501
+   - Flask API: http://localhost:4000
+
+6. **To stop the containers**
+```bash
+   docker compose down
+```
+
+7. **If you make changes to the database files, recreate the DB container**
+```bash
+   docker compose down db -v && docker compose up db -d
+```
