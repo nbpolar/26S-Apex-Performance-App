@@ -9,10 +9,13 @@
 # the request ends. That cleanup is registered via init_app().
 #------------------------------------------------------------
 import mysql.connector
-from flask import g, current_app
+from mysql.connector.connection import MySQLConnection
+from flask import Flask, g, current_app
+from typing import Optional
 
 
-def get_db():
+def get_db() -> MySQLConnection:
+    """Gets the database"""
     if 'db' not in g:
         g.db = mysql.connector.connect(
             host=current_app.config['MYSQL_DATABASE_HOST'],
@@ -24,13 +27,15 @@ def get_db():
     return g.db
 
 
-def close_db(e=None):
+def close_db(e: Optional[BaseException] = None) -> None:
+    """Closes database"""
     db = g.pop('db', None)
     if db is not None:
         db.close()
 
 
-def init_app(app):
+def init_app(app : Flask) -> None:
+    """Refer to comments"""
     # This registers close_db as a teardown function, meaning Flask will
     # call it automatically at the end of every request. There is no
     # connection setup here because get_db() opens the connection lazily —
