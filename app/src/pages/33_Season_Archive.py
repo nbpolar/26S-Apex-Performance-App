@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("🗄️ Season Archive")
+st.title("Season Archive")
 st.write("Archive old season data to keep current season queries fast.")
 
 API_BASE = "http://web-api:4000"
