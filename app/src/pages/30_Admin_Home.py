@@ -6,7 +6,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title(f"Welcome, {st.session_state['first_name']}! 🖥️")
+st.title(f"Welcome, {st.session_state['first_name']}!")
 st.write("### System Administration Dashboard")
 
 col1, col2, col3 = st.columns(3)
