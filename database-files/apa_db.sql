@@ -1742,106 +1742,132 @@ CREATE TABLE IF NOT EXISTS ArchivedPerformance (
    FOREIGN KEY (player_id) REFERENCES Player(player_id)
 );
 
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (1, 100, 35, 26, 18, 14, 7200.75, 26.26, '7th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (2, 51, 25, 48, 8, 15, 5557.98, 24.47, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (3, 116, 14, 2, 11, 33, 9493.2, 92.03, '5th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (4, 162, 6, 17, 18, 21, 3792.96, 6.58, '9th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (5, 172, 4, 32, 4, 13, 5901.08, 94.05, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (6, 112, 17, 13, 1, 33, 2849.17, 32.98, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (7, 22, 11, 50, 7, 22, 418.81, 10.98, '2nd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (8, 3, 29, 53, 7, 30, 3030.21, 74.99, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (9, 113, 8, 6, 10, 22, 4794.06, 92.36, '10th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (10, 53, 27, 56, 2, 21, 1060.48, 78.62, '5th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (11, 132, 13, 25, 5, 13, 1141.73, 8.67, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (12, 165, 17, 43, 15, 23, 3925.54, 85.63, '1st');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (13, 46, 11, 42, 8, 32, 2644.29, 67.97, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (14, 141, 1, 19, 11, 10, 7553.77, 8.8, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (15, 168, 21, 4, 5, 11, 2383.94, 47.89, '10th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (16, 34, 24, 14, 2, 37, 339.26, 40.66, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (17, 169, 34, 54, 7, 31, 2428.75, 47.79, '2nd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (18, 48, 25, 4, 9, 14, 2416.81, 74.25, '5th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (19, 147, 25, 59, 13, 37, 5222.09, 65.92, '9th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (20, 178, 8, 49, 3, 6, 7488.75, 44.18, '7th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (21, 75, 25, 42, 15, 13, 8968.09, 25.03, '10th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (22, 74, 34, 43, 8, 27, 6626.63, 82.55, '5th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (23, 81, 11, 31, 17, 30, 7737.04, 91.65, '1st');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (24, 9, 22, 36, 13, 37, 4580.34, 7.93, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (25, 61, 2, 48, 0, 6, 9273.86, 53.67, '10th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (26, 139, 25, 8, 1, 38, 8961.3, 91.25, '1st');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (27, 146, 34, 20, 3, 12, 3271.49, 87.92, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (28, 24, 14, 22, 4, 29, 9622.11, 72.76, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (29, 15, 31, 34, 1, 13, 5152.5, 67.47, '1st');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (30, 147, 10, 37, 9, 8, 3147.87, 22.49, '2nd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (31, 132, 34, 22, 5, 17, 8826.33, 25.66, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (32, 151, 27, 37, 9, 25, 5172.89, 51.15, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (33, 59, 22, 45, 20, 5, 5808.16, 65.37, '7th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (34, 106, 25, 27, 6, 27, 5938.57, 48.84, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (35, 51, 17, 30, 8, 25, 2024.87, 81.63, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (36, 155, 13, 21, 20, 15, 6306.09, 54.04, '2nd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (37, 103, 4, 47, 15, 30, 5809.07, 82.42, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (38, 32, 12, 42, 11, 18, 9874.79, 95.16, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (39, 125, 28, 43, 18, 27, 8128.55, 92.47, '7th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (40, 28, 2, 42, 1, 20, 7750.08, 7.36, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (41, 16, 23, 12, 16, 31, 3325.9, 26.53, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (42, 110, 32, 45, 14, 19, 9047.04, 8.37, '1st');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (43, 128, 22, 6, 7, 6, 9262.81, 73.51, '5th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (44, 144, 20, 12, 10, 13, 5785.92, 90.89, '9th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (45, 100, 1, 23, 18, 37, 8832.7, 25.6, '10th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (46, 8, 10, 25, 3, 33, 5747.98, 28.3, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (47, 114, 21, 43, 15, 37, 6117.99, 46.15, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (48, 124, 18, 50, 12, 24, 9319.21, 55.44, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (49, 54, 24, 17, 19, 21, 7126.47, 49.41, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (50, 72, 22, 4, 0, 29, 6654.5, 59.71, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (51, 20, 13, 48, 13, 16, 2653.66, 59.18, '7th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (52, 33, 22, 6, 17, 14, 9429.83, 31.75, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (53, 121, 33, 50, 3, 39, 194.2, 26.18, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (54, 80, 33, 42, 2, 7, 8964.19, 45.69, '10th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (55, 176, 18, 37, 16, 27, 3552.44, 81.85, '10th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (56, 100, 22, 15, 12, 23, 2362.53, 16.84, '1st');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (57, 111, 30, 21, 4, 32, 5601.63, 27.87, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (58, 102, 31, 54, 15, 10, 6370.69, 78.96, '9th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (59, 11, 3, 52, 4, 19, 5759.93, 83.22, '2nd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (60, 173, 9, 28, 9, 25, 4425.6, 8.67, '1st');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (61, 167, 1, 14, 18, 28, 7566.81, 98.45, '1st');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (62, 131, 3, 39, 0, 10, 4508.38, 84.04, '5th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (63, 28, 23, 5, 8, 37, 6240.7, 70.59, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (64, 36, 20, 6, 6, 18, 8725.0, 10.02, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (65, 73, 26, 26, 11, 4, 1081.11, 89.4, '2nd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (66, 46, 21, 3, 4, 19, 2107.34, 24.73, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (67, 179, 14, 15, 17, 23, 6611.5, 51.95, '1st');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (68, 87, 7, 15, 12, 37, 6280.34, 15.0, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (69, 86, 20, 15, 10, 7, 489.44, 61.57, '10th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (70, 90, 6, 48, 17, 34, 3422.0, 55.19, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (71, 150, 10, 34, 6, 34, 1967.28, 17.77, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (72, 123, 23, 12, 17, 29, 4691.6, 58.3, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (73, 27, 2, 51, 9, 32, 5404.43, 87.47, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (74, 119, 12, 21, 1, 23, 1434.37, 76.26, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (75, 156, 9, 17, 13, 23, 457.75, 50.19, '7th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (76, 31, 23, 40, 0, 30, 1633.86, 23.87, '6th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (77, 11, 23, 48, 6, 25, 938.32, 47.2, '5th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (78, 86, 27, 13, 14, 40, 8134.1, 10.43, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (79, 27, 1, 10, 18, 32, 6408.77, 11.86, '9th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (80, 49, 31, 38, 3, 37, 3664.14, 1.2, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (81, 162, 11, 29, 17, 26, 7931.51, 81.84, '2nd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (82, 142, 31, 6, 11, 30, 397.77, 41.11, '7th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (83, 99, 20, 46, 5, 29, 3882.58, 73.5, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (84, 144, 15, 25, 16, 1, 3310.1, 57.94, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (85, 75, 23, 33, 15, 0, 5381.59, 63.67, '2nd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (86, 174, 24, 59, 13, 5, 6814.61, 35.13, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (87, 18, 5, 5, 2, 22, 7663.41, 20.8, '9th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (88, 115, 30, 51, 10, 18, 7060.12, 11.38, '2nd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (89, 101, 33, 54, 14, 35, 4098.97, 37.71, '9th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (90, 85, 35, 8, 20, 5, 712.8, 31.92, '10th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (91, 101, 14, 35, 15, 9, 4795.41, 72.0, '3rd');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (92, 124, 8, 36, 7, 24, 6501.27, 9.02, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (93, 156, 5, 14, 5, 24, 1505.85, 22.61, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (94, 126, 29, 10, 19, 33, 2816.37, 82.45, '8th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (95, 173, 21, 56, 16, 12, 2764.53, 88.71, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (96, 113, 21, 20, 6, 30, 5505.97, 25.67, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (97, 134, 33, 1, 20, 5, 146.76, 22.23, '1st');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (98, 159, 23, 51, 12, 1, 502.67, 14.8, '10th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (99, 129, 34, 16, 6, 9, 6375.88, 14.35, '4th');
-insert into ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) values (100, 45, 14, 17, 6, 20, 6500.67, 88.7, '4th');
+INSERT INTO ArchivedPerformance (archived_performance_id, original_performance_id, archived_match_id, player_id, kills, assists, damage, accuracy_pct, placement) VALUES
+(1, 100, 35, 26, 18, 14, 7200.75, 26.26, 7),
+(2, 51, 25, 48, 8, 15, 5557.98, 24.47, 6),
+(3, 116, 14, 2, 11, 33, 9493.2, 92.03, 5),
+(4, 162, 6, 17, 18, 21, 3792.96, 6.58, 9),
+(5, 172, 4, 32, 4, 13, 5901.08, 94.05, 4),
+(6, 112, 17, 13, 1, 33, 2849.17, 32.98, 3),
+(7, 22, 11, 50, 7, 22, 418.81, 10.98, 2),
+(8, 3, 29, 53, 7, 30, 3030.21, 74.99, 8),
+(9, 113, 8, 6, 10, 22, 4794.06, 92.36, 10),
+(10, 53, 27, 56, 2, 21, 1060.48, 78.62, 5),
+(11, 132, 13, 25, 5, 13, 1141.73, 8.67, 8),
+(12, 165, 17, 43, 15, 23, 3925.54, 85.63, 1),
+(13, 46, 11, 42, 8, 32, 2644.29, 67.97, 6),
+(14, 141, 1, 19, 11, 10, 7553.77, 8.8, 4),
+(15, 168, 21, 4, 5, 11, 2383.94, 47.89, 10),
+(16, 34, 24, 14, 2, 37, 339.26, 40.66, 6),
+(17, 169, 34, 54, 7, 31, 2428.75, 47.79, 2),
+(18, 48, 25, 4, 9, 14, 2416.81, 74.25, 5),
+(19, 147, 25, 59, 13, 37, 5222.09, 65.92, 9),
+(20, 178, 8, 49, 3, 6, 7488.75, 44.18, 7),
+(21, 75, 25, 42, 15, 13, 8968.09, 25.03, 10),
+(22, 74, 34, 43, 8, 27, 6626.63, 82.55, 5),
+(23, 81, 11, 31, 17, 30, 7737.04, 91.65, 1),
+(24, 9, 22, 36, 13, 37, 4580.34, 7.93, 6),
+(25, 61, 2, 48, 0, 6, 9273.86, 53.67, 10),
+(26, 139, 25, 8, 1, 38, 8961.3, 91.25, 1),
+(27, 146, 34, 20, 3, 12, 3271.49, 87.92, 8),
+(28, 24, 14, 22, 4, 29, 9622.11, 72.76, 3),
+(29, 15, 31, 34, 1, 13, 5152.5, 67.47, 1),
+(30, 147, 10, 37, 9, 8, 3147.87, 22.49, 2),
+(31, 132, 34, 22, 5, 17, 8826.33, 25.66, 4),
+(32, 151, 27, 37, 9, 25, 5172.89, 51.15, 8),
+(33, 59, 22, 45, 20, 5, 5808.16, 65.37, 7),
+(34, 106, 25, 27, 6, 27, 5938.57, 48.84, 4),
+(35, 51, 17, 30, 8, 25, 2024.87, 81.63, 3),
+(36, 155, 13, 21, 20, 15, 6306.09, 54.04, 2),
+(37, 103, 4, 47, 15, 30, 5809.07, 82.42, 6),
+(38, 32, 12, 42, 11, 18, 9874.79, 95.16, 8),
+(39, 125, 28, 43, 18, 27, 8128.55, 92.47, 7),
+(40, 28, 2, 42, 1, 20, 7750.08, 7.36, 6),
+(41, 16, 23, 12, 16, 31, 3325.9, 26.53, 6),
+(42, 110, 32, 45, 14, 19, 9047.04, 8.37, 1),
+(43, 128, 22, 6, 7, 6, 9262.81, 73.51, 5),
+(44, 144, 20, 12, 10, 13, 5785.92, 90.89, 9),
+(45, 100, 1, 23, 18, 37, 8832.7, 25.6, 10),
+(46, 8, 10, 25, 3, 33, 5747.98, 28.3, 6),
+(47, 114, 21, 43, 15, 37, 6117.99, 46.15, 3),
+(48, 124, 18, 50, 12, 24, 9319.21, 55.44, 8),
+(49, 54, 24, 17, 19, 21, 7126.47, 49.41, 8),
+(50, 72, 22, 4, 0, 29, 6654.5, 59.71, 4),
+(51, 20, 13, 48, 13, 16, 2653.66, 59.18, 7),
+(52, 33, 22, 6, 17, 14, 9429.83, 31.75, 8),
+(53, 121, 33, 50, 3, 39, 194.2, 26.18, 8),
+(54, 80, 33, 42, 2, 7, 8964.19, 45.69, 10),
+(55, 176, 18, 37, 16, 27, 3552.44, 81.85, 10),
+(56, 100, 22, 15, 12, 23, 2362.53, 16.84, 1),
+(57, 111, 30, 21, 4, 32, 5601.63, 27.87, 8),
+(58, 102, 31, 54, 15, 10, 6370.69, 78.96, 9),
+(59, 11, 3, 52, 4, 19, 5759.93, 83.22, 2),
+(60, 173, 9, 28, 9, 25, 4425.6, 8.67, 1),
+(61, 167, 1, 14, 18, 28, 7566.81, 98.45, 1),
+(62, 131, 3, 39, 0, 10, 4508.38, 84.04, 5),
+(63, 28, 23, 5, 8, 37, 6240.7, 70.59, 8),
+(64, 36, 20, 6, 6, 18, 8725.0, 10.02, 6),
+(65, 73, 26, 26, 11, 4, 1081.11, 89.4, 2),
+(66, 46, 21, 3, 4, 19, 2107.34, 24.73, 6),
+(67, 179, 14, 15, 17, 23, 6611.5, 51.95, 1),
+(68, 87, 7, 15, 12, 37, 6280.34, 15.0, 6),
+(69, 86, 20, 15, 10, 7, 489.44, 61.57, 10),
+(70, 90, 6, 48, 17, 34, 3422.0, 55.19, 3),
+(71, 150, 10, 34, 6, 34, 1967.28, 17.77, 4),
+(72, 123, 23, 12, 17, 29, 4691.6, 58.3, 3),
+(73, 27, 2, 51, 9, 32, 5404.43, 87.47, 3),
+(74, 119, 12, 21, 1, 23, 1434.37, 76.26, 4),
+(75, 156, 9, 17, 13, 23, 457.75, 50.19, 7),
+(76, 31, 23, 40, 0, 30, 1633.86, 23.87, 6),
+(77, 11, 23, 48, 6, 25, 938.32, 47.2, 5),
+(78, 86, 27, 13, 14, 40, 8134.1, 10.43, 8),
+(79, 27, 1, 10, 18, 32, 6408.77, 11.86, 9),
+(80, 49, 31, 38, 3, 37, 3664.14, 1.2, 3),
+(81, 162, 11, 29, 17, 26, 7931.51, 81.84, 2),
+(82, 142, 31, 6, 11, 30, 397.77, 41.11, 7),
+(83, 99, 20, 46, 5, 29, 3882.58, 73.5, 3),
+(84, 144, 15, 25, 16, 1, 3310.1, 57.94, 3),
+(85, 75, 23, 33, 15, 0, 5381.59, 63.67, 2),
+(86, 174, 24, 59, 13, 5, 6814.61, 35.13, 8),
+(87, 18, 5, 5, 2, 22, 7663.41, 20.8, 9),
+(88, 115, 30, 51, 10, 18, 7060.12, 11.38, 2),
+(89, 101, 33, 54, 14, 35, 4098.97, 37.71, 9),
+(90, 85, 35, 8, 20, 5, 712.8, 31.92, 10),
+(91, 101, 14, 35, 15, 9, 4795.41, 72.0, 3),
+(92, 124, 8, 36, 7, 24, 6501.27, 9.02, 4),
+(93, 156, 5, 14, 5, 24, 1505.85, 22.61, 4),
+(94, 126, 29, 10, 19, 33, 2816.37, 82.45, 8),
+(95, 173, 21, 56, 16, 12, 2764.53, 88.71, 4),
+(96, 113, 21, 20, 6, 30, 5505.97, 25.67, 4),
+(97, 134, 33, 1, 20, 5, 146.76, 22.23, 1),
+(98, 159, 23, 51, 12, 1, 502.67, 14.8, 10),
+(99, 129, 34, 16, 6, 9, 6375.88, 14.35, 4),
+(100, 45, 14, 17, 6, 20, 6500.67, 88.7, 4),
+(101, 55, 16, 7, 14, 28, 7234.56, 71.23, 1),
+(102, 88, 19, 29, 9, 17, 4521.34, 55.67, 3),
+(103, 62, 7, 11, 6, 31, 3847.92, 42.18, 5),
+(104, 37, 26, 44, 11, 19, 6123.45, 63.89, 2),
+(105, 143, 32, 58, 4, 23, 2934.71, 38.44, 7),
+(106, 77, 3, 33, 17, 12, 8456.23, 79.56, 1),
+(107, 108, 16, 9, 8, 26, 5678.34, 61.34, 4),
+(108, 164, 28, 60, 3, 14, 2145.67, 29.87, 9),
+(109, 42, 6, 19, 12, 35, 7890.12, 84.23, 2),
+(110, 93, 30, 47, 7, 21, 4312.89, 48.76, 6),
+(111, 118, 19, 38, 5, 16, 3021.45, 33.91, 8),
+(112, 66, 11, 55, 16, 9, 8934.56, 88.45, 1),
+(113, 145, 22, 24, 10, 28, 5567.23, 59.12, 4),
+(114, 38, 4, 46, 2, 33, 1789.34, 22.67, 10),
+(115, 97, 29, 31, 13, 18, 6234.78, 67.34, 3),
+(116, 160, 17, 57, 8, 24, 4456.91, 51.23, 6),
+(117, 43, 8, 3, 19, 11, 9123.45, 91.67, 1),
+(118, 71, 33, 40, 4, 29, 2678.34, 36.78, 8),
+(119, 130, 20, 52, 11, 16, 5901.23, 62.45, 4),
+(120, 56, 13, 28, 7, 38, 3456.78, 44.89, 7),
+(121, 177, 27, 16, 15, 22, 7812.34, 76.56, 2),
+(122, 64, 5, 41, 3, 13, 2234.56, 31.23, 9),
+(123, 109, 31, 53, 9, 27, 5123.67, 57.89, 5),
+(124, 180, 24, 30, 18, 8, 8567.89, 82.34, 1),
+(125, 76, 18, 22, 6, 32, 3789.45, 46.12, 7);
 
 CREATE TABLE IF NOT EXISTS SystemReport (
    report_id INT PRIMARY KEY,

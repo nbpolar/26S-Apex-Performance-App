@@ -88,7 +88,7 @@ Each flagged performance also includes:
 
 4. **Start all containers**
 ```bash
-   docker compose up 
+   docker compose up -d
    - note: if the mysql_db container isn't available when checking the status through the command 'docker ps',
    go into docker desktop and manually enable the db container
 ```
@@ -104,5 +104,5 @@ Each flagged performance also includes:
 
 7. **If you make changes to the database files, recreate the DB container**
 ```bash
-   docker compose down db -v && docker compose up 
+   docker compose down db -v && docker compose up -d
 ```
