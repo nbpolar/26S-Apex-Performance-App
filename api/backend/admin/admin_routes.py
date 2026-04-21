@@ -1,12 +1,12 @@
-from flask import Blueprint, jsonify, request, current_app, ResponseReturnValue
+from flask import Blueprint, jsonify, request, current_app
 from backend.db_connection import get_db
 from mysql.connector import Error
 
 admin = Blueprint("admin", __name__)
 
 
-@admin.route("/players", methods=["POST"]) # type: ignore[misc]
-def add_player() -> ResponseReturnValue:
+@admin.route("/players", methods=["POST"]) 
+def add_player()
     """Adds player to table"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -46,8 +46,8 @@ def add_player() -> ResponseReturnValue:
         cursor.close()
 
 
-@admin.route("/players/<int:player_id>", methods=["PUT"]) # type: ignore[misc]
-def update_player(player_id : int) -> ResponseReturnValue:
+@admin.route("/players/<int:player_id>", methods=["PUT"])
+def update_player(player_id : int)
     """Updates stats for player"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -81,8 +81,8 @@ def update_player(player_id : int) -> ResponseReturnValue:
         cursor.close()
 
 
-@admin.route("/data-sources", methods=["POST"]) # type: ignore[misc]
-def add_data_source() -> ResponseReturnValue: 
+@admin.route("/data-sources", methods=["POST"]) 
+def add_data_source() 
     """Add a data source"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -112,8 +112,8 @@ def add_data_source() -> ResponseReturnValue:
         cursor.close()
 
 
-@admin.route("/audit-flags", methods=["GET"]) # type: ignore[misc]
-def get_audit_flags() -> ResponseReturnValue:
+@admin.route("/audit-flags", methods=["GET"])
+def get_audit_flags()
     """Accesses an audit flag"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -149,8 +149,8 @@ def get_audit_flags() -> ResponseReturnValue:
         cursor.close()
 
 
-@admin.route("/audit-flags/<int:flag_id>", methods=["PUT"]) # type: ignore[misc]
-def update_audit_flag(flag_id : int) -> ResponseReturnValue:
+@admin.route("/audit-flags/<int:flag_id>", methods=["PUT"])
+def update_audit_flag(flag_id : int)
     """Updates an audit flag"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -174,8 +174,8 @@ def update_audit_flag(flag_id : int) -> ResponseReturnValue:
         cursor.close()
 
 
-@admin.route("/archive-season", methods=["POST"]) # type: ignore[misc]
-def archive_season() -> ResponseReturnValue:
+@admin.route("/archive-season", methods=["POST"])
+def archive_season()
     """Archives a season"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -207,8 +207,8 @@ def archive_season() -> ResponseReturnValue:
         cursor.close()
 
 
-@admin.route("/reports", methods=["GET"]) # type: ignore[misc]
-def get_reports() -> ResponseReturnValue:
+@admin.route("/reports", methods=["GET"])
+def get_reports()
     """Gets a player's report"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -233,8 +233,8 @@ def get_reports() -> ResponseReturnValue:
         cursor.close()
 
 
-@admin.route("/players", methods=["GET"]) # type: ignore[misc]
-def get_all_players() -> ResponseReturnValue:
+@admin.route("/players", methods=["GET"])
+def get_all_players()
     """Gets a team's report"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -255,8 +255,8 @@ def get_all_players() -> ResponseReturnValue:
         cursor.close()
 
 
-@admin.route("/data-sources", methods=["GET"]) # type: ignore[misc]
-def get_data_sources() -> ResponseReturnValue:
+@admin.route("/data-sources", methods=["GET"])
+def get_data_sources()
     """Gets a data source"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -269,8 +269,8 @@ def get_data_sources() -> ResponseReturnValue:
         cursor.close()
 
 
-@admin.route("/players/<int:player_id>", methods=["DELETE"]) # type: ignore[misc]
-def delete_player(player_id : int) -> ResponseReturnValue:
+@admin.route("/players/<int:player_id>", methods=["DELETE"])
+def delete_player(player_id : int)
     """Deletes a player from records"""
     cursor = get_db().cursor(dictionary=True)
     try:
