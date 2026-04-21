@@ -8,7 +8,7 @@ We are building an app that will track pro players and the matches that they pla
  - Weapons
  - Viability rankings
 
-While many tracker apps already aim to track player performance in ranked and unranked games, there aren't any trackers that effectively track professional matches and the performance of players playing in them. Since professional matches are naturally more competitive, the data from those matches should be more effective at indicaating patterns in an ever changing meta, while also being able to indicate emerging trends. 
+While many tracker apps already aim to track player performance in ranked and unranked games, there aren't any trackers that effectively track professional matches and the performance of players playing in them. Since professional matches are naturally more competitive, the data from those matches should be more effective at indicating patterns in an ever changing meta, while also being able to indicate emerging trends. 
 
 This tool is intended for:
  - Competitive Analysts
