@@ -5,11 +5,6 @@ from mysql.connector import Error
 admin = Blueprint("admin", __name__)
 
 
-# ------------------------------------------------------------
-# 1. POST /admin/players
-# User Story 4.1 - Add new player to the system so they
-# can see their account and stats.
-# ------------------------------------------------------------
 @admin.route("/players", methods=["POST"])
 def add_player():
     cursor = get_db().cursor(dictionary=True)
@@ -50,11 +45,6 @@ def add_player():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 2. PUT /admin/players/<player_id>
-# User Story 4.2 - Update existing player info to correct
-# any incorrect data.
-# ------------------------------------------------------------
 @admin.route("/players/<int:player_id>", methods=["PUT"])
 def update_player(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -89,11 +79,6 @@ def update_player(player_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 3. POST /admin/data-sources
-# User Story 4.3 - Add new data sources so the app can
-# support new features as the game evolves.
-# ------------------------------------------------------------
 @admin.route("/data-sources", methods=["POST"])
 def add_data_source():
     cursor = get_db().cursor(dictionary=True)
@@ -124,11 +109,6 @@ def add_data_source():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 4. GET /admin/audit-flags
-# User Story 4.4 - View match records flagged for impossible
-# stats to identify potential cheaters.
-# ------------------------------------------------------------
 @admin.route("/audit-flags", methods=["GET"])
 def get_audit_flags():
     cursor = get_db().cursor(dictionary=True)
@@ -165,11 +145,6 @@ def get_audit_flags():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 5. PUT /admin/audit-flags/<flag_id>
-# User Story 4.4 - Update the review status of an audit flag
-# (e.g. clear a flag or mark as confirmed cheat).
-# ------------------------------------------------------------
 @admin.route("/audit-flags/<int:flag_id>", methods=["PUT"])
 def update_audit_flag(flag_id):
     cursor = get_db().cursor(dictionary=True)
@@ -194,11 +169,6 @@ def update_audit_flag(flag_id):
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 6. POST /admin/archive-season
-# User Story 4.5 - Archive match data from a previous season
-# so current season queries run faster.
-# ------------------------------------------------------------
 @admin.route("/archive-season", methods=["POST"])
 def archive_season():
     cursor = get_db().cursor(dictionary=True)
@@ -230,12 +200,6 @@ def archive_season():
     finally:
         cursor.close()
 
-
-# ------------------------------------------------------------
-# 7. GET /admin/reports
-# User Story 4.6 - Generate reports on weapon usage,
-# location trends, and data usage.
-# ------------------------------------------------------------
 @admin.route("/reports", methods=["GET"])
 def get_reports():
     cursor = get_db().cursor(dictionary=True)
@@ -261,10 +225,6 @@ def get_reports():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 8. GET /admin/players
-# Get all players for admin management view.
-# ------------------------------------------------------------
 @admin.route("/players", methods=["GET"])
 def get_all_players():
     cursor = get_db().cursor(dictionary=True)
@@ -286,10 +246,6 @@ def get_all_players():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 9. GET /admin/data-sources
-# View all registered data sources.
-# ------------------------------------------------------------
 @admin.route("/data-sources", methods=["GET"])
 def get_data_sources():
     cursor = get_db().cursor(dictionary=True)
@@ -303,10 +259,6 @@ def get_data_sources():
         cursor.close()
 
 
-# ------------------------------------------------------------
-# 10. DELETE /admin/players/<player_id>
-# User Story 4.4 - Remove a confirmed cheating account.
-# ------------------------------------------------------------
 @admin.route("/players/<int:player_id>", methods=["DELETE"])
 def delete_player(player_id):
     cursor = get_db().cursor(dictionary=True)
@@ -320,136 +272,6 @@ def delete_player(player_id):
         return jsonify({"message": "Player deleted"}), 200
     except Error as e:
         current_app.logger.error(f"Error in delete_player: {e}")
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-
-# 11. POST /admin/matches
-# Add a new match record to the system
-@admin.route("/matches", methods=["POST"])
-def add_match():
-    cursor = get_db().cursor(dictionary=True)
-    try:
-        data = request.get_json()
-        required = ["match_date", "season_name", "map_name", "mode"]
-        for field in required:
-            if field not in data:
-                return jsonify({"error": f"Missing required field: {field}"}), 400
- 
-        cursor.execute("""
-            INSERT INTO `Match`
-                (match_date, season_name, map_name, mode,
-                 match_duration, tournament_name, source_id)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
-        """, (
-            data["match_date"],
-            data["season_name"],
-            data["map_name"],
-            data["mode"],
-            data.get("match_duration"),
-            data.get("tournament_name"),
-            data.get("source_id")
-        ))
-        get_db().commit()
-        return jsonify({"message": "Match added",
-                        "match_id": cursor.lastrowid}), 201
-    except Error as e:
-        current_app.logger.error(f"Error in add_match: {e}")
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-
-# 12. POST /admin/matches/<match_id>/performance
-# Add a palyer performance record to a specific match
-@admin.route("/matches/<int:match_id>/performance", methods=["POST"])
-def add_match_performance(match_id):
-    cursor = get_db().cursor(dictionary=True)
-    try:
-        data = request.get_json()
-        required = ["player_id", "kills", "deaths", "assists",
-                    "damage", "placement", "accuracy_pct"]
-        for field in required:
-            if field not in data:
-                return jsonify({"error": f"Missing required field: {field}"}), 400
- 
-        cursor.execute("""
-            INSERT INTO PlayerMatchPerformance
-                (player_id, match_id, legend_id, weapon_id,
-                 kills, deaths, assists, damage,
-                 placement, knockdowns, accuracy_pct, win_flag,
-                 is_included_in_analysis, is_active)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s,
-                    %s, %s, %s, %s, TRUE, TRUE)
-        """, (
-            data["player_id"],
-            match_id,
-            data.get("legend_id"),
-            data.get("weapon_id"),
-            data["kills"],
-            data["deaths"],
-            data["assists"],
-            data["damage"],
-            data["placement"],
-            data.get("knockdowns", 0),
-            data["accuracy_pct"],
-            data.get("win_flag", False)
-        ))
-        get_db().commit()
-        return jsonify({"message": "Performance record added",
-                        "performance_id": cursor.lastrowid}), 201
-    except Error as e:
-        current_app.logger.error(f"Error in add_match_performance: {e}")
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-
-
-# 13. POST /admin/legends
-# Add a new legend to the game
-@admin.route("/legends", methods=["POST"])
-def add_legend():
-    cursor = get_db().cursor(dictionary=True)
-    try:
-        data = request.get_json()
-        required = ["legend_name", "class_type"]
-        for field in required:
-            if field not in data:
-                return jsonify({"error": f"Missing required field: {field}"}), 400
- 
-        cursor.execute("""
-            INSERT INTO Legend (legend_name, class_type)
-            VALUES (%s, %s)
-        """, (data["legend_name"], data["class_type"]))
-        get_db().commit()
-        return jsonify({"message": "Legend added",
-                        "legend_id": cursor.lastrowid}), 201
-    except Error as e:
-        current_app.logger.error(f"Error in add_legend: {e}")
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-
-# 14. POST /admin/weapons
-# Add a new weapon to the game
-@admin.route("/weapons", methods=["POST"])
-def add_weapon():
-    cursor = get_db().cursor(dictionary=True)
-    try:
-        data = request.get_json()
-        required = ["weapon_name", "weapon_type", "ammo_type"]
-        for field in required:
-            if field not in data:
-                return jsonify({"error": f"Missing required field: {field}"}), 400
- 
-        cursor.execute("""
-            INSERT INTO Weapon (weapon_name, weapon_type, ammo_type)
-            VALUES (%s, %s, %s)
-        """, (data["weapon_name"], data["weapon_type"], data["ammo_type"]))
-        get_db().commit()
-        return jsonify({"message": "Weapon added",
-                        "weapon_id": cursor.lastrowid}), 201
-    except Error as e:
-        current_app.logger.error(f"Error in add_weapon: {e}")
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
