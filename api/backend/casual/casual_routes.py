@@ -1,12 +1,13 @@
-from flask import Blueprint, jsonify, request, current_app
+from flask import Blueprint, jsonify, request, current_app, ResponseReturnValue
 from backend.db_connection import get_db
 from mysql.connector import Error
 
 casual = Blueprint("casual", __name__)
 
 
-@casual.route("/meta/top-weapons", methods=["GET"])
-def get_top_weapons():
+@casual.route("/meta/top-weapons", methods=["GET"]) # type: ignore[misc]
+def get_top_weapons() -> ResponseReturnValue:
+    """Accesses top weapons"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -27,8 +28,9 @@ def get_top_weapons():
     finally:
         cursor.close()
 
-@casual.route("/meta/top-legends", methods=["GET"])
-def get_top_legends():
+@casual.route("/meta/top-legends", methods=["GET"]) # type: ignore[misc]
+def get_top_legends() -> ResponseReturnValue:
+    """Accesses top legends"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -51,8 +53,9 @@ def get_top_legends():
         cursor.close()
 
 
-@casual.route("/players/<int:player_id>/stats", methods=["GET"])
-def get_player_stats(player_id):
+@casual.route("/players/<int:player_id>/stats", methods=["GET"]) # type: ignore[misc]
+def get_player_stats(player_id : int) -> ResponseReturnValue:
+    """Accesses a given player's stats"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -72,8 +75,9 @@ def get_player_stats(player_id):
         cursor.close()
 
 
-@casual.route("/players/<int:player_id>/notifications", methods=["GET"])
-def get_player_notifications(player_id):
+@casual.route("/players/<int:player_id>/notifications", methods=["GET"]) # type: ignore[misc]
+def get_player_notifications(player_id : int) -> ResponseReturnValue:
+    """Accesses a given player's notifications"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -98,8 +102,9 @@ def get_player_notifications(player_id):
         cursor.close()
 
 
-@casual.route("/players/<int:player_id>/goals", methods=["GET"])
-def get_player_goals(player_id):
+@casual.route("/players/<int:player_id>/goals", methods=["GET"]) # type: ignore[misc]
+def get_player_goals(player_id : int) -> ResponseReturnValue:
+    """Accesses a given player's goals"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -115,8 +120,9 @@ def get_player_goals(player_id):
     finally:
         cursor.close()
 
-@casual.route("/players/<int:player_id>/best-legends-weapons", methods=["GET"])
-def get_best_legends_weapons(player_id):
+@casual.route("/players/<int:player_id>/best-legends-weapons", methods=["GET"]) # type: ignore[misc]
+def get_best_legends_weapons(player_id : int) -> ResponseReturnValue:
+    """Accesses a given legend's best weapons"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -141,8 +147,9 @@ def get_best_legends_weapons(player_id):
         cursor.close()
 
 
-@casual.route("/players/<int:player_id>/goals", methods=["POST"])
-def add_goal(player_id):
+@casual.route("/players/<int:player_id>/goals", methods=["POST"]) # type: ignore[misc]
+def add_goal(player_id : int) -> ResponseReturnValue:
+    """Adds a goal"""
     cursor = get_db().cursor(dictionary=True)
     try:
         data = request.get_json()
@@ -168,8 +175,9 @@ def add_goal(player_id):
         cursor.close()
 
 
-@casual.route("/players/stats/<int:stat_entry_id>/hide", methods=["PUT"])
-def hide_stat_entry(stat_entry_id):
+@casual.route("/players/stats/<int:stat_entry_id>/hide", methods=["PUT"]) # type: ignore[misc]
+def hide_stat_entry(stat_entry_id: int) -> ResponseReturnValue:
+    """Hides a player's stat entry"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -188,8 +196,9 @@ def hide_stat_entry(stat_entry_id):
         cursor.close()
 
 
-@casual.route("/players/<int:player_id>/goals/<int:goal_id>", methods=["PUT"])
-def update_goal(player_id, goal_id):
+@casual.route("/players/<int:player_id>/goals/<int:goal_id>", methods=["PUT"]) # type: ignore[misc]
+def update_goal(player_id : int, goal_id : int) -> ResponseReturnValue:
+    """Updates a player's goal"""
     cursor = get_db().cursor(dictionary=True)
     try:
         data = request.get_json()
@@ -216,8 +225,9 @@ def update_goal(player_id, goal_id):
         cursor.close()
 
 
-@casual.route("/players/<int:player_id>/goals/<int:goal_id>", methods=["DELETE"])
-def delete_goal(player_id, goal_id):
+@casual.route("/players/<int:player_id>/goals/<int:goal_id>", methods=["DELETE"]) # type: ignore[misc]
+def delete_goal(player_id : int, goal_id : int) -> ResponseReturnValue:
+    """Deletes a player's goal"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute(

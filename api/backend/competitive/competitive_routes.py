@@ -1,12 +1,13 @@
-from flask import Blueprint, jsonify, request, current_app
+from flask import  Blueprint, jsonify, request, current_app, ResponseReturnValue
 from backend.db_connection import get_db
 from mysql.connector import Error
 
 competitive = Blueprint("competitive", __name__)
 
 
-@competitive.route("/players/<int:player_id>/performance", methods=["GET"])
-def get_player_performance(player_id):
+@competitive.route("/players/<int:player_id>/performance", methods=["GET"])  # type: ignore[misc]
+def get_player_performance(player_id : int) -> ResponseReturnValue:
+    """Accesses player performance"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -35,8 +36,9 @@ def get_player_performance(player_id):
         cursor.close()
 
 
-@competitive.route("/players/<int:player_id>/performance-history", methods=["GET"])
-def get_performance_history(player_id):
+@competitive.route("/players/<int:player_id>/performance-history", methods=["GET"]) # type: ignore[misc]
+def get_performance_history(player_id : int) -> ResponseReturnValue:
+    """Accesses player performance history"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -60,8 +62,9 @@ def get_performance_history(player_id):
         cursor.close()
 
 
-@competitive.route("/leaderboard", methods=["GET"])
-def get_leaderboard():
+@competitive.route("/leaderboard", methods=["GET"]) # type: ignore[misc]
+def get_leaderboard() -> ResponseReturnValue:
+    """Accesses leaderboard"""
     cursor = get_db().cursor(dictionary=True)
     try:
         limit = request.args.get("limit", 20, type=int)
@@ -85,8 +88,9 @@ def get_leaderboard():
         cursor.close()
 
 
-@competitive.route("/meta/trends", methods=["GET"])
-def get_meta_trends():
+@competitive.route("/meta/trends", methods=["GET"]) # type: ignore[misc]
+def get_meta_trends() -> ResponseReturnValue:
+    """Accesses trends in the meta"""
     cursor = get_db().cursor(dictionary=True)
     try:
         season = request.args.get("season")
@@ -119,8 +123,9 @@ def get_meta_trends():
         cursor.close()
 
 
-@competitive.route("/players/<int:player_id>/match-history", methods=["GET"])
-def get_match_history(player_id):
+@competitive.route("/players/<int:player_id>/match-history", methods=["GET"]) # type: ignore[misc]
+def get_match_history(player_id : int) -> ResponseReturnValue:
+    """Accesses match history"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -147,8 +152,9 @@ def get_match_history(player_id):
         cursor.close()
 
 
-@competitive.route("/players/<int:player_id>/weapon-stats", methods=["GET"])
-def get_player_weapon_stats(player_id):
+@competitive.route("/players/<int:player_id>/weapon-stats", methods=["GET"]) # type: ignore[misc]
+def get_player_weapon_stats(player_id : int) -> ResponseReturnValue:
+    """Accesses weapon stats per player"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -176,8 +182,9 @@ def get_player_weapon_stats(player_id):
 @competitive.route(
     "/players/<int:player_id>/matches/<int:performance_id>/exclude",
     methods=["PUT"]
-)
-def exclude_match(player_id, performance_id):
+) # type: ignore[misc]
+def exclude_match(player_id : int, performance_id : int) -> ResponseReturnValue:
+    """Excludes a player match"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -199,8 +206,9 @@ def exclude_match(player_id, performance_id):
 @competitive.route(
     "/players/<int:player_id>/matches/<int:performance_id>/include",
     methods=["PUT"]
-)
-def include_match(player_id, performance_id):
+) # type: ignore[misc]
+def include_match(player_id : int, performance_id : int) -> ResponseReturnValue:
+    """Includes a player match"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -219,8 +227,9 @@ def include_match(player_id, performance_id):
         cursor.close()
 
 
-@competitive.route("/players/<int:player_id>/performance", methods=["POST"])
-def add_match_performance(player_id):
+@competitive.route("/players/<int:player_id>/performance", methods=["POST"]) # type: ignore[misc]
+def add_match_performance(player_id : int) -> ResponseReturnValue:
+    """Adds a player's match performance"""
     cursor = get_db().cursor(dictionary=True)
     try:
         data = request.get_json()

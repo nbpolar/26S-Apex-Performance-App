@@ -10,7 +10,8 @@ from backend.competitive.competitive_routes import competitive
 from backend.admin.admin_routes import admin
 
 
-def create_app():
+def create_app() -> Flask:
+    """Creates the APA app"""
     app = Flask(__name__)
 
     app.logger.setLevel(logging.DEBUG)

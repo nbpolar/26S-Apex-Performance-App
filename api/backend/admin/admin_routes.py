@@ -1,12 +1,13 @@
-from flask import Blueprint, jsonify, request, current_app
+from flask import Blueprint, jsonify, request, current_app, ResponseReturnValue
 from backend.db_connection import get_db
 from mysql.connector import Error
 
 admin = Blueprint("admin", __name__)
 
 
-@admin.route("/players", methods=["POST"])
-def add_player():
+@admin.route("/players", methods=["POST"]) # type: ignore[misc]
+def add_player() -> ResponseReturnValue:
+    """Adds player to table"""
     cursor = get_db().cursor(dictionary=True)
     try:
         data = request.get_json()
@@ -45,8 +46,9 @@ def add_player():
         cursor.close()
 
 
-@admin.route("/players/<int:player_id>", methods=["PUT"])
-def update_player(player_id):
+@admin.route("/players/<int:player_id>", methods=["PUT"]) # type: ignore[misc]
+def update_player(player_id : int) -> ResponseReturnValue:
+    """Updates stats for player"""
     cursor = get_db().cursor(dictionary=True)
     try:
         data = request.get_json()
@@ -79,8 +81,9 @@ def update_player(player_id):
         cursor.close()
 
 
-@admin.route("/data-sources", methods=["POST"])
-def add_data_source():
+@admin.route("/data-sources", methods=["POST"]) # type: ignore[misc]
+def add_data_source() -> ResponseReturnValue: 
+    """Add a data source"""
     cursor = get_db().cursor(dictionary=True)
     try:
         data = request.get_json()
@@ -109,8 +112,9 @@ def add_data_source():
         cursor.close()
 
 
-@admin.route("/audit-flags", methods=["GET"])
-def get_audit_flags():
+@admin.route("/audit-flags", methods=["GET"]) # type: ignore[misc]
+def get_audit_flags() -> ResponseReturnValue:
+    """Accesses an audit flag"""
     cursor = get_db().cursor(dictionary=True)
     try:
         status_filter = request.args.get("status")
@@ -145,8 +149,9 @@ def get_audit_flags():
         cursor.close()
 
 
-@admin.route("/audit-flags/<int:flag_id>", methods=["PUT"])
-def update_audit_flag(flag_id):
+@admin.route("/audit-flags/<int:flag_id>", methods=["PUT"]) # type: ignore[misc]
+def update_audit_flag(flag_id : int) -> ResponseReturnValue:
+    """Updates an audit flag"""
     cursor = get_db().cursor(dictionary=True)
     try:
         data = request.get_json()
@@ -169,8 +174,9 @@ def update_audit_flag(flag_id):
         cursor.close()
 
 
-@admin.route("/archive-season", methods=["POST"])
-def archive_season():
+@admin.route("/archive-season", methods=["POST"]) # type: ignore[misc]
+def archive_season() -> ResponseReturnValue:
+    """Archives a season"""
     cursor = get_db().cursor(dictionary=True)
     try:
         data = request.get_json()
@@ -201,8 +207,9 @@ def archive_season():
         cursor.close()
 
 
-@admin.route("/reports", methods=["GET"])
-def get_reports():
+@admin.route("/reports", methods=["GET"]) # type: ignore[misc]
+def get_reports() -> ResponseReturnValue:
+    """Gets a player's report"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -226,8 +233,9 @@ def get_reports():
         cursor.close()
 
 
-@admin.route("/players", methods=["GET"])
-def get_all_players():
+@admin.route("/players", methods=["GET"]) # type: ignore[misc]
+def get_all_players() -> ResponseReturnValue:
+    """Gets a team's report"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("""
@@ -247,8 +255,9 @@ def get_all_players():
         cursor.close()
 
 
-@admin.route("/data-sources", methods=["GET"])
-def get_data_sources():
+@admin.route("/data-sources", methods=["GET"]) # type: ignore[misc]
+def get_data_sources() -> ResponseReturnValue:
+    """Gets a data source"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute("SELECT * FROM DataSource ORDER BY added_date DESC")
@@ -260,8 +269,9 @@ def get_data_sources():
         cursor.close()
 
 
-@admin.route("/players/<int:player_id>", methods=["DELETE"])
-def delete_player(player_id):
+@admin.route("/players/<int:player_id>", methods=["DELETE"]) # type: ignore[misc]
+def delete_player(player_id : int) -> ResponseReturnValue:
+    """Deletes a player from records"""
     cursor = get_db().cursor(dictionary=True)
     try:
         cursor.execute(
