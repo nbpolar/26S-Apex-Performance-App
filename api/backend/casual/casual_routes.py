@@ -282,39 +282,60 @@ def delete_goal(player_id, goal_id):
     finally:
         cursor.close()
 
-
-# 11. PUT /casual/players/<player_id>/goals/<goal_id>
-# Updates progress on an existing goal
-@casual.route("/players/<int:player_id>/goals/<int:goal_id>", methods=["PUT"])
-def update_goal(player_id, goal_id):
+# 11. GET /casual/players/<player_id>/legend-performance
+# View legend performance breakdown
+@casual.route("/players/<int:player_id>/legend-performance", methods=["GET"])
+def get_player_legend_performance(player_id):
     cursor = get_db().cursor(dictionary=True)
     try:
-        data = request.get_json()
-        allowed = ["current_value", "goal_status", "end_date"]
-        updates = [f"{f} = %s" for f in allowed if f in data]
-        params  = [data[f] for f in allowed if f in data]
- 
-        if not updates:
-            return jsonify({"error": "No valid fields to update"}), 400
- 
-        params += [player_id, goal_id]
-        cursor.execute(
-            f"UPDATE Goal SET {', '.join(updates)} WHERE player_id = %s AND goal_id = %s",
-            params
-        )
-        get_db().commit()
-        if cursor.rowcount == 0:
-            return jsonify({"error": "Goal not found"}), 404
-        return jsonify({"message": "Goal updated"}), 200
+        cursor.execute("""
+            SELECT
+                l.legend_id,
+                l.legend_name,
+                l.class_type,
+                plp.matches_played,
+                plp.wins,
+                plp.win_rate,
+                plp.avg_damage,
+                plp.kd_ratio
+            FROM PlayerLegendPerformance plp
+            JOIN Legend l ON plp.legend_id = l.legend_id
+            WHERE plp.player_id = %s
+            ORDER BY plp.win_rate DESC
+        """, (player_id,))
+        return jsonify(cursor.fetchall()), 200
     except Error as e:
-        current_app.logger.error(f"Error in update_goal: {e}")
+        current_app.logger.error(f"Error in get_player_legend_performance: {e}")
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
- 
- 
-# 12. PUT /casual/players/<player_id>/notifications/<notification_id>
-# User Story 2.3 - Mark a notification as read after viewing event details
+        
+# 12. GET /casual/events
+# Browse all game events
+@casual.route("/events", methods=["GET"])
+def get_events():
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        cursor.execute("""
+            SELECT
+                event_id,
+                event_name,
+                event_type,
+                start_date,
+                end_date,
+                description
+            FROM GameEvent
+            ORDER BY start_date DESC
+        """)
+        return jsonify(cursor.fetchall()), 200
+    except Error as e:
+        current_app.logger.error(f"Error in get_events: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        
+# 13. PUT /casual/players/<player_id>/notifications/<notification_id>
+# Mark a notification as read after viewing the event details.
 @casual.route("/players/<int:player_id>/notifications/<int:notification_id>", methods=["PUT"])
 def mark_notification_read(player_id, notification_id):
     cursor = get_db().cursor(dictionary=True)
@@ -338,28 +359,8 @@ def mark_notification_read(player_id, notification_id):
     finally:
         cursor.close()
         
-# 13. DELETE /casual/players/<player_id>/goals/<goal_id>
-# Deletes a goal the player no longer wants
-@casual.route("/players/<int:player_id>/goals/<int:goal_id>", methods=["DELETE"])
-def delete_goal(player_id, goal_id):
-    cursor = get_db().cursor(dictionary=True)
-    try:
-        cursor.execute(
-            "DELETE FROM Goal WHERE player_id = %s AND goal_id = %s",
-            (player_id, goal_id)
-        )
-        get_db().commit()
-        if cursor.rowcount == 0:
-            return jsonify({"error": "Goal not found"}), 404
-        return jsonify({"message": "Goal deleted"}), 200
-    except Error as e:
-        current_app.logger.error(f"Error in delete_goal: {e}")
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-        
 # 14. DELETE /casual/players/<player_id>/stats/<stat_entry_id>
-# Permanently remove an old stat entry that the player no longer cares about.
+# Permanently remove an old stat entry
 @casual.route("/players/<int:player_id>/stats/<int:stat_entry_id>", methods=["DELETE"])
 def delete_stat_entry(player_id, stat_entry_id):
     cursor = get_db().cursor(dictionary=True)
