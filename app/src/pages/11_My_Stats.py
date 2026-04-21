@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("📊 My Stats")
+st.title("My Stats")
 st.write("Track your best personal stats to compare with friends.")
 
 API_BASE = "http://web-api:4000"
@@ -31,7 +31,7 @@ except Exception as e:
     st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("🏅 Best Legends & Weapons")
+st.subheader("Best Legends & Weapons")
 try:
     r = requests.get(f"{API_BASE}/casual/players/{player_id}/best-legends-weapons")
     if r.status_code == 200:
@@ -46,7 +46,7 @@ except Exception as e:
     st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("🙈 Hide a Stat Entry")
+st.subheader("Hide a Stat Entry")
 with st.form("hide_stat"):
     stat_id = st.number_input("Stat Entry ID to hide", min_value=1, step=1)
     if st.form_submit_button("Hide Stat"):
