@@ -8,7 +8,7 @@ from modules.nav import SideBarLinks
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title("🔥 Meta Hub")
+st.title("Meta Hub")
 st.write("See the current top performing legends and weapons without doing the research yourself.")
 
 API_BASE = "http://web-api:4000"
@@ -16,7 +16,7 @@ API_BASE = "http://web-api:4000"
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("🔫 Top Weapons")
+    st.subheader("Top Weapons")
     try:
         r = requests.get(f"{API_BASE}/casual/meta/top-weapons")
         if r.status_code == 200:
@@ -33,7 +33,7 @@ with col1:
         st.error(f"Could not connect to API: {e}")
 
 with col2:
-    st.subheader("🦸 Top Legends")
+    st.subheader("Top Legends")
     try:
         r = requests.get(f"{API_BASE}/casual/meta/top-legends")
         if r.status_code == 200:
@@ -50,7 +50,7 @@ with col2:
         st.error(f"Could not connect to API: {e}")
 
 st.divider()
-st.subheader("🔔 My Notifications")
+st.subheader("My Notifications")
 player_id = st.session_state.get('player_id', 3)
 try:
     r = requests.get(f"{API_BASE}/casual/players/{player_id}/notifications")
