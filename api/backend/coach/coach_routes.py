@@ -5,8 +5,8 @@ from mysql.connector import Error
 coach = Blueprint("coach", __name__)
 
 
-@coach.route("/team-compositions", methods=["GET"]) # type: ignore[misc]
-def get_team_compositions() -> ResponseReturnValue:
+@coach.route("/team-compositions", methods=["GET"])
+def get_team_compositions()
     """Gets team comps"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -31,8 +31,8 @@ def get_team_compositions() -> ResponseReturnValue:
         cursor.close()
 
 
-@coach.route("/teams/<int:team_id>/death-heatmap", methods=["GET"]) # type: ignore[misc]
-def get_death_heatmap(team_id : int) -> ResponseReturnValue:
+@coach.route("/teams/<int:team_id>/death-heatmap", methods=["GET"])
+def get_death_heatmap(team_id : int)
     """Returns a heatmap of player deaths"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -58,8 +58,8 @@ def get_death_heatmap(team_id : int) -> ResponseReturnValue:
         cursor.close()
 
 
-@coach.route("/teams/<int:team_id>/placement-vs-kills", methods=["GET"]) # type: ignore[misc]
-def get_placement_vs_kills(team_id : int) -> ResponseReturnValue:
+@coach.route("/teams/<int:team_id>/placement-vs-kills", methods=["GET"])
+def get_placement_vs_kills(team_id : int)
     """Returns placement vs kills"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -83,8 +83,8 @@ def get_placement_vs_kills(team_id : int) -> ResponseReturnValue:
         cursor.close()
 
 
-@coach.route("/teams/<int:team_id>/damage-to-kills", methods=["GET"]) # type: ignore[misc]
-def get_damage_to_kills(team_id : int) -> ResponseReturnValue:
+@coach.route("/teams/<int:team_id>/damage-to-kills", methods=["GET"])
+def get_damage_to_kills(team_id : int)
     """"Returns damage contribution to kills"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -108,8 +108,8 @@ def get_damage_to_kills(team_id : int) -> ResponseReturnValue:
         cursor.close()
 
 
-@coach.route("/players/<int:player_id>/accuracy-by-weapon", methods=["GET"]) # type: ignore[misc]
-def get_accuracy_by_weapon(player_id : int) -> ResponseReturnValue:
+@coach.route("/players/<int:player_id>/accuracy-by-weapon", methods=["GET"])
+def get_accuracy_by_weapon(player_id : int)
     """Accesses player accuracy by weapon"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -134,8 +134,8 @@ def get_accuracy_by_weapon(player_id : int) -> ResponseReturnValue:
         cursor.close()
 
 
-@coach.route("/teams/<int:team_id>/knockdown-efficiency", methods=["GET"]) # type: ignore[misc]
-def get_knockdown_efficiency(team_id : int) -> ResponseReturnValue:
+@coach.route("/teams/<int:team_id>/knockdown-efficiency", methods=["GET"])
+def get_knockdown_efficiency(team_id : int)
     """Accesses how efficient a team is at knockdowns"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -160,8 +160,8 @@ def get_knockdown_efficiency(team_id : int) -> ResponseReturnValue:
         cursor.close()
 
 
-@coach.route("/teams", methods=["GET"]) # type: ignore[misc]
-def get_all_teams() -> ResponseReturnValue:
+@coach.route("/teams", methods=["GET"])
+def get_all_teams()
     """Accesses all available teams"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -174,8 +174,8 @@ def get_all_teams() -> ResponseReturnValue:
         cursor.close()
 
 
-@coach.route("/team-compositions", methods=["POST"]) # type: ignore[misc]
-def add_team_composition() -> ResponseReturnValue:
+@coach.route("/team-compositions", methods=["POST"])
+def add_team_composition()
     """Adds a team comp"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -200,8 +200,8 @@ def add_team_composition() -> ResponseReturnValue:
         cursor.close()
 
 
-@coach.route("/team-compositions/<int:composition_id>", methods=["PUT"]) # type: ignore[misc]
-def update_team_composition(composition_id : int) -> ResponseReturnValue:
+@coach.route("/team-compositions/<int:composition_id>", methods=["PUT"])
+def update_team_composition(composition_id : int)
     """Updates team comp"""
     cursor = get_db().cursor(dictionary=True)
     try:
@@ -227,8 +227,8 @@ def update_team_composition(composition_id : int) -> ResponseReturnValue:
         cursor.close()
 
 
-@coach.route("/team-compositions/<int:composition_id>", methods=["DELETE"]) # type: ignore[misc]
-def delete_team_composition(composition_id : int) -> ResponseReturnValue:
+@coach.route("/team-compositions/<int:composition_id>", methods=["DELETE"])
+def delete_team_composition(composition_id : int)
     """Deletes team comp"""
     cursor = get_db().cursor(dictionary=True)
     try:
